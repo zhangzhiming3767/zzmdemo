@@ -2,12 +2,14 @@ package com.example.zzmdemo.controller;
 
 import com.example.zzmdemo.core.SysUser;
 import com.example.zzmdemo.core.response.PageResponse;
+import com.example.zzmdemo.service.JdbcTestService;
 import com.github.pagehelper.Page;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -17,7 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 public class JdbcTestController {
-
+    @Resource
+    private JdbcTestService jdbcTestService;
      /**
       * @author zhangzhiming
       * description
