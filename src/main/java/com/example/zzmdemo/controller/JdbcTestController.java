@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date 19:06 2019/10/9
  */
 @RestController
+@RequestMapping("/jdbc")
 public class JdbcTestController {
     @Resource
     private JdbcTestService jdbcTestService;
@@ -28,8 +29,8 @@ public class JdbcTestController {
       */
      @RequestMapping("/getUserList")
      public PageResponse<SysUser> userTest(Integer pageNumber, Integer pageSize, HttpServletResponse response) {
-         response.setHeader("Access-Control-Allow-Origin", "*");
-         response.setHeader("Access-Control-Allow-Methods", "POST");
+//         response.setHeader("Access-Control-Allow-Origin", "*");
+//         response.setHeader("Access-Control-Allow-Methods", "POST");
          Page<SysUser> sysUserPage =jdbcTestService.userTest(pageNumber,pageSize);
          return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
      }
