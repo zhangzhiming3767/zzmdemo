@@ -35,7 +35,7 @@ public class QuartzTestController {
     /**
      * @param type 1创建 2停止 3删除 4重启
      * @author :zhangzhiming
-     * description :定时任务测试
+     * description :定时任务测试 22
      * @date :Create in  2019/5/27 14:57
      */
     @PostMapping("/quartzTest")
