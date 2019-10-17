@@ -7,13 +7,12 @@ import com.example.zzmdemo.core.quartz.InitJobService;
 import com.example.zzmdemo.core.response.FailedResponse;
 import com.example.zzmdemo.core.response.PageResponse;
 import com.example.zzmdemo.core.response.Response;
+import com.example.zzmdemo.core.response.SuccessResponse;
 import com.example.zzmdemo.service.JdbcTestService;
 import com.github.pagehelper.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -59,6 +58,18 @@ public class QuartzTestController {
         } else {
             return new FailedResponse("参数错误");
         }
+    }
+
+     /**
+      * @author zhangzhiming
+      * description  启动时执行，进行初始化
+      * @date 16:05 2019/10/17
+      */
+    @PostConstruct
+    @RequestMapping(value = "/initializingTest", method = RequestMethod.GET)
+    public Response initializing() {
+        System.err.println("看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗");
+        return new SuccessResponse();
     }
 
 }
