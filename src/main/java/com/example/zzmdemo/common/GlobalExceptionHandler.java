@@ -2,17 +2,17 @@ package com.example.zzmdemo.common;
 
 import com.example.zzmdemo.core.response.FailedResponse;
 import com.example.zzmdemo.core.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,16 +22,13 @@ import java.io.IOException;
  * description 全局异常处理，所有的抛出异常的controller都会跑到这里
  * @date 17:42 2019/10/17
  */
-@ControllerAdvice
+@RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
-
-    private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
     @ExceptionHandler(value = Exception.class)
-    @ResponseBody
     public Response defaultErrorHandler(HttpServletResponse response, Exception e) throws Exception {
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        logger.error("GLOBAL", e);
+        log.error("GLOBAL", e);
         String str = e.getMessage();
         if (e instanceof IllegalArgumentException) {
             return new FailedResponse("参数异常," + str);
