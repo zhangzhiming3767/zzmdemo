@@ -40,4 +40,19 @@ public class JdbcTestService {
             return "保存失败！";
         }
     }
+
+     /**
+      * @author zhangzhiming
+      * description
+      * @date 17:15 2019/10/31
+      */
+     public String updateUser(SysUser sysUser) {
+         sysUser.setCreateTime(new Date());
+         int count = jdbcTestMapper.updateByPrimaryKeySelective(sysUser);
+         if (count == 1) {
+             return "保存成功！";
+         } else {
+             return "保存失败！";
+         }
+     }
 }

@@ -2,6 +2,8 @@ package com.example.zzmdemo.controller;
 
 import com.example.zzmdemo.core.SysUser;
 import com.example.zzmdemo.core.response.PageResponse;
+import com.example.zzmdemo.core.response.Response;
+import com.example.zzmdemo.core.response.SuccessResponse;
 import com.example.zzmdemo.service.JdbcTestService;
 import com.github.pagehelper.Page;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +38,13 @@ public class JdbcTestController {
     }
 
     @RequestMapping("/addUser")
-    public String addUser(@RequestBody SysUser sysUser) {
-        return jdbcTestService.addUser(sysUser);
+    public Response addUser(@RequestBody SysUser sysUser) {
+        return new SuccessResponse(jdbcTestService.addUser(sysUser));
+    }
+
+    @RequestMapping("/updateUser")
+    public Response updateUser(@RequestBody SysUser sysUser) {
+        return new SuccessResponse(jdbcTestService.updateUser(sysUser));
     }
 
 }
