@@ -1,15 +1,15 @@
 package com.example.zzmdemo.core;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 @Data
 @Table(name = "sys_user")
-public class SysUser {
+@EqualsAndHashCode(callSuper = false)
+public class SysUser extends BaseEntity {
     @Id
     private String id;
     private String loginName;
@@ -21,9 +21,6 @@ public class SysUser {
     private Integer rylb;
     private String photo;
     private Integer userState;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
-    private Date modifiedTime;
 
 
 }
