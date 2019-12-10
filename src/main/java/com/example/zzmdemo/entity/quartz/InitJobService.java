@@ -1,10 +1,10 @@
-package com.example.zzmdemo.core.quartz;
+package com.example.zzmdemo.entity.quartz;
 
 import com.alibaba.fastjson.JSON;
-import com.example.zzmdemo.core.response.FailedResponse;
-import com.example.zzmdemo.core.response.PageResponse;
-import com.example.zzmdemo.core.response.Response;
-import com.example.zzmdemo.core.response.SuccessResponse;
+import com.example.zzmdemo.entity.response.FailedResponse;
+import com.example.zzmdemo.entity.response.PageResponse;
+import com.example.zzmdemo.entity.response.Response;
+import com.example.zzmdemo.entity.response.SuccessResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.quartz.SchedulerException;

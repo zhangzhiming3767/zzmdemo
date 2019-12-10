@@ -1,8 +1,7 @@
 package com.example.zzmdemo.mapper;
 
 import com.example.zzmdemo.common.Mapper;
-import com.example.zzmdemo.core.SysMenu;
-import com.example.zzmdemo.core.SysUser;
+import com.example.zzmdemo.entity.SysMenu;
 
 import java.util.List;
 

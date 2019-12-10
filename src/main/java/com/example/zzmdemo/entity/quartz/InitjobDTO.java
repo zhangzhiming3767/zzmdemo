@@ -1,4 +1,4 @@
-package com.example.zzmdemo.core.quartz;
+package com.example.zzmdemo.entity.quartz;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

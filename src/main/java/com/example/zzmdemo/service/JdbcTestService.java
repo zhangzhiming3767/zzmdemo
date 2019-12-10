@@ -1,7 +1,7 @@
 package com.example.zzmdemo.service;
 
 import com.example.zzmdemo.common.IdGenerator;
-import com.example.zzmdemo.core.SysUser;
+import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;

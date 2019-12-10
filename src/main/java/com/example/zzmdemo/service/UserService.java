@@ -1,16 +1,13 @@
 package com.example.zzmdemo.service;
 
 import com.example.zzmdemo.common.IdGenerator;
-import com.example.zzmdemo.core.SysMenu;
-import com.example.zzmdemo.core.SysUser;
-import com.example.zzmdemo.mapper.MenuMapper;
+import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
- /**
+/**
   * @author zhangzhiming
   * description 用户管理
   * @date 16:10 2019/11/14

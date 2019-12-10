@@ -1,8 +1,7 @@
 package com.example.zzmdemo.controller;
 
-import com.example.zzmdemo.core.response.ObjectResponse;
-import com.example.zzmdemo.core.response.Response;
-import com.example.zzmdemo.service.MenuService;
+import com.example.zzmdemo.entity.response.ObjectResponse;
+import com.example.zzmdemo.entity.response.Response;
 import com.example.zzmdemo.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

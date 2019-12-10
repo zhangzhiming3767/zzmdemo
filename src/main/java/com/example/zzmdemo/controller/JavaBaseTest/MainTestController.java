@@ -17,12 +17,18 @@ public class MainTestController {
 //        asyncTest();
 //        forTest();
 //        forTest2();
-        List<String> test1 = new ArrayList<>();
-        List<String> test2 = new ArrayList<>();
-        test2.add("1");
-        test2.add("2");
-        test2.addAll(test1);
-        System.out.println("22");
+//        List<String> test1 = new ArrayList<>();
+//        List<String> test2 = new ArrayList<>();
+//        test2.add("1");
+//        test2.add("2");
+//        test2.addAll(test1);
+//        System.out.println("22");
+        Integer a;
+        a=127;
+        String test="2019101100101";
+//        a=Integer.valueOf(test);
+        a=Integer.getInteger(test);
+        System.out.println(a);
     }
 
     /**

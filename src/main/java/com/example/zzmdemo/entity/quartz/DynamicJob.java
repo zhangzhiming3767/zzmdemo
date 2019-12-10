@@ -1,4 +1,4 @@
-package com.example.zzmdemo.core.quartz;
+package com.example.zzmdemo.entity.quartz;
 
 import lombok.Getter;
 import lombok.Setter;

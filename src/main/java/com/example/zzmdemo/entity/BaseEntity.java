@@ -1,4 +1,4 @@
-package com.example.zzmdemo.core;
+package com.example.zzmdemo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

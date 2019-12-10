@@ -2,19 +2,15 @@ package com.example.zzmdemo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.zzmdemo.core.SysUser;
-import com.example.zzmdemo.core.quartz.InitJobService;
-import com.example.zzmdemo.core.response.FailedResponse;
-import com.example.zzmdemo.core.response.PageResponse;
-import com.example.zzmdemo.core.response.Response;
-import com.example.zzmdemo.core.response.SuccessResponse;
+import com.example.zzmdemo.entity.quartz.InitJobService;
+import com.example.zzmdemo.entity.response.FailedResponse;
+import com.example.zzmdemo.entity.response.Response;
+import com.example.zzmdemo.entity.response.SuccessResponse;
 import com.example.zzmdemo.service.JdbcTestService;
-import com.github.pagehelper.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;

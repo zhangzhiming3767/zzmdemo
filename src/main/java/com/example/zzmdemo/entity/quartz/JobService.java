@@ -1,4 +1,4 @@
-package com.example.zzmdemo.core.quartz;
+package com.example.zzmdemo.entity.quartz;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;

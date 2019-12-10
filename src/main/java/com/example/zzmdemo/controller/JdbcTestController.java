@@ -1,9 +1,9 @@
 package com.example.zzmdemo.controller;
 
-import com.example.zzmdemo.core.SysUser;
-import com.example.zzmdemo.core.response.PageResponse;
-import com.example.zzmdemo.core.response.Response;
-import com.example.zzmdemo.core.response.SuccessResponse;
+import com.example.zzmdemo.entity.SysUser;
+import com.example.zzmdemo.entity.response.PageResponse;
+import com.example.zzmdemo.entity.response.Response;
+import com.example.zzmdemo.entity.response.SuccessResponse;
 import com.example.zzmdemo.service.JdbcTestService;
 import com.github.pagehelper.Page;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,7 +1,7 @@
 package com.example.zzmdemo.service;
 
 import com.example.zzmdemo.common.IdGenerator;
-import com.example.zzmdemo.core.SysMenu;
+import com.example.zzmdemo.entity.SysMenu;
 import com.example.zzmdemo.mapper.MenuMapper;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.zzmdemo.core.response;
+package com.example.zzmdemo.entity.response;
 
 public class SuccessResponse implements Response {
 	private String code;

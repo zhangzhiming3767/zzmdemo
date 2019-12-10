@@ -1,4 +1,4 @@
-package com.example.zzmdemo.core;
+package com.example.zzmdemo.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

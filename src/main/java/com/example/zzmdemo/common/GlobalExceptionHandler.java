@@ -1,7 +1,7 @@
 package com.example.zzmdemo.common;
 
-import com.example.zzmdemo.core.response.FailedResponse;
-import com.example.zzmdemo.core.response.Response;
+import com.example.zzmdemo.entity.response.FailedResponse;
+import com.example.zzmdemo.entity.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.TypeMismatchException;
@@ -10,8 +10,6 @@ import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletResponse;

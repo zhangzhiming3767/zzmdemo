@@ -1,9 +1,8 @@
 package com.example.zzmdemo.controller;
 
 import com.example.zzmdemo.common.DataException;
-import com.example.zzmdemo.common.IdGenerator;
-import com.example.zzmdemo.core.response.ObjectResponse;
-import com.example.zzmdemo.core.response.Response;
+import com.example.zzmdemo.entity.response.ObjectResponse;
+import com.example.zzmdemo.entity.response.Response;
 import com.example.zzmdemo.service.TestService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,7 @@
 package com.example.zzmdemo.mapper;
 
 import com.example.zzmdemo.common.Mapper;
-import com.example.zzmdemo.core.SysUser;
+import com.example.zzmdemo.entity.SysUser;
 
 import java.util.List;
 @org.apache.ibatis.annotations.Mapper
