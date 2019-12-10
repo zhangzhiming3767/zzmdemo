@@ -1,9 +1,10 @@
 package com.example.zzmdemo.controller.JavaBaseTest;
 
+import com.example.zzmdemo.entity.test.Student;
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhangzhiming
@@ -13,6 +14,9 @@ import java.util.List;
 public class MainTestController {
 
     public static void main(String[] args) {
+        judgeEquals();
+
+
 //        lambdaTest();
 //        asyncTest();
 //        forTest();
@@ -23,12 +27,39 @@ public class MainTestController {
 //        test2.add("2");
 //        test2.addAll(test1);
 //        System.out.println("22");
-        Integer a;
-        a=127;
-        String test="2019101100101";
+//        Integer a;
+//        a=127;
+//        String test="2019101100101";
 //        a=Integer.valueOf(test);
-        a=Integer.getInteger(test);
-        System.out.println(a);
+//        a=Integer.getInteger(test);
+//        System.out.println(a);
+    }
+
+    /**
+    * @author :zhangzhiming
+    * description :重写equals与hashCode
+    * @date :Create in  2019/12/10 11:42
+    */
+    public static void judgeEquals(){
+        System.out.println("isBlank:"+ StringUtils.isBlank(" "));
+        System.out.println("isEmpty:"+ StringUtils.isEmpty(" "));
+//        String a="233";
+//        String b="233";
+//        int c=10;
+//        int d=10;
+//        System.out.println("判断:"+a==b);
+//        System.out.println("判断:"+a.equals(b));
+//        System.out.println(c==d);
+//        Student stu = new Student(123, "Tom");
+//        HashSet<Student> set = new HashSet<>();
+//        set.add(stu);
+//        set.add(new Student(456, "Jerry"));
+//        set.add(new Student(123, "Lily"));
+//        Iterator<Student> iterator = set.iterator();
+//        while (iterator.hasNext()) {
+//            Student student = iterator.next();
+//            System.out.println(student.getStuNum() + " --- " + student.getName());
+//        }
     }
 
     /**
