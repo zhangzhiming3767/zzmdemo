@@ -1,4 +1,4 @@
-package com.example.zzmdemo.controller.JavaBaseTest;
+package com.example.zzmdemo.controller.threadTest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

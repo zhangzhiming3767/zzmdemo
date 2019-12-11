@@ -1,7 +1,9 @@
 package com.example.zzmdemo.controller.JavaBaseTest;
 
 import com.example.zzmdemo.entity.test.Student;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -41,8 +43,14 @@ public class MainTestController {
     * @date :Create in  2019/12/10 11:42
     */
     public static void judgeEquals(){
-        System.out.println("isBlank:"+ StringUtils.isBlank(" "));
-        System.out.println("isEmpty:"+ StringUtils.isEmpty(" "));
+        List<String> test=new ArrayList<>(2);
+        test.add("1");
+        test.add("2");
+        test.add("3");
+        test.add("4");
+//        System.out.println("isBlank:"+ StringUtils.isBlank(" "));
+//        System.out.println("isEmpty:"+ StringUtils.isEmpty(" "));
+//        StringUtils.split("","");
 //        String a="233";
 //        String b="233";
 //        int c=10;
