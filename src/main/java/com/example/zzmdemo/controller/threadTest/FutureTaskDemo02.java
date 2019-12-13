@@ -14,7 +14,7 @@ import java.util.concurrent.FutureTask;
  * @author zhangzhiming
  * @since 2019/12/10 19:11
  */
-public class Demo02 {
+public class FutureTaskDemo02 {
     public static void main(String[] args) {
         Call call = new Call();
         FutureTask<Integer> futureTask1 = new FutureTask<>(call);
