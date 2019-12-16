@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 代码描述<p>
  * Copyright: Copyright (C) 2019 XXX, Inc. All rights reserved. <p>
  * Company: 阿里云<p>
- *
+ *    需要一个工具类来展示redis常用方法
  * @author zhangzhiming
  * @since 2019/12/16 16:49
  */
