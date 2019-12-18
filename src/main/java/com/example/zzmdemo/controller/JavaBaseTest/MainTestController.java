@@ -1,12 +1,10 @@
 package com.example.zzmdemo.controller.JavaBaseTest;
 
-import com.example.zzmdemo.entity.test.Student;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
-
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author zhangzhiming
@@ -16,9 +14,15 @@ import java.util.*;
 public class MainTestController {
 
     public static void main(String[] args) {
-        judgeEquals();
-
-
+//        System.out.println("22".hashCode());
+        AtomicInteger test=new AtomicInteger();
+        //自增
+        test.getAndIncrement();
+        System.out.println(test);
+//        test13();
+//        test12();
+//        test11();
+//        judgeEquals();
 //        lambdaTest();
 //        asyncTest();
 //        forTest();
@@ -37,13 +41,55 @@ public class MainTestController {
 //        System.out.println(a);
     }
 
+    public static void test13() {
+        List<String> test1=new ArrayList<>();
+        test1.add("22");
+        test1.add("33");
+        test1.add("55");
+        for(String test:test1){
+            test=test+"1";
+        }
+        System.out.println(test1);
+    }
+
+
     /**
-    * @author :zhangzhiming
-    * description :重写equals与hashCode
-    * @date :Create in  2019/12/10 11:42
-    */
-    public static void judgeEquals(){
-        List<String> test=new ArrayList<>(2);
+     * @author :zhangzhiming
+     * description :如果两个数都为1则为1，否则为0。
+     * @date :Create in  2019/12/17 9:08
+     */
+    public static void test11() {
+        int a = 0;
+        if ((1 < 0) & (a++ > 0)) {
+
+        }
+        System.out.println("这是a：" + a);
+        System.out.println(129 & 128);
+    }
+
+    /**
+     * @author :zhangzhiming
+     * description :相同为0，不同为1
+     * @date :Create in  2019/12/17 10:13
+     */
+    public static void test12() {
+        //01
+        int a = 1;
+        //10
+        int b = 2;
+        //11
+        int c=3;
+        System.out.println("第一个："+(2 ^ 1));
+        System.out.println("第二个："+(2 ^ 3));
+    }
+
+    /**
+     * @author :zhangzhiming
+     * description :重写equals与hashCode
+     * @date :Create in  2019/12/10 11:42
+     */
+    public static void judgeEquals() {
+        List<String> test = new ArrayList<>(2);
         test.add("1");
         test.add("2");
         test.add("3");
