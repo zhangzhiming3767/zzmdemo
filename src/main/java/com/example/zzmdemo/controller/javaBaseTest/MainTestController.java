@@ -1,5 +1,8 @@
 package com.example.zzmdemo.controller.javaBaseTest;
 
+import com.example.zzmdemo.entity.SysUser;
+
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,12 +16,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class MainTestController {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
+        test14();
 //        System.out.println("22".hashCode());
-        AtomicInteger test=new AtomicInteger();
+//        AtomicInteger test=new AtomicInteger();
         //自增
-        test.getAndIncrement();
-        System.out.println(test);
+//        test.getAndIncrement();
+//        System.out.println(test);
 //        test13();
 //        test12();
 //        test11();
@@ -39,6 +43,19 @@ public class MainTestController {
 //        a=Integer.valueOf(test);
 //        a=Integer.getInteger(test);
 //        System.out.println(a);
+    }
+
+    public  static void test14() throws IllegalAccessException {
+        SysUser sysUser=new SysUser();
+        sysUser.setId("233");
+        sysUser.setIdCard("qwe");
+        Class cls = sysUser.getClass();
+        Field[] fields = cls.getDeclaredFields();
+        for(int i=0; i<fields.length; i++){
+            Field f = fields[i];
+            f.setAccessible(true);
+            System.out.println("属性名:" + f.getName() + " 属性值:" + f.get(sysUser));
+        }
     }
 
     public static void test13() {

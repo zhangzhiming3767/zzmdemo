@@ -6,6 +6,8 @@ import com.example.zzmdemo.mapper.JdbcTestMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -24,6 +26,7 @@ public class JdbcTestService {
      * description
      * @date 19:29 2019/10/9
      */
+    @Transactional(propagation=Propagation.REQUIRED,rollbackFor = Exception.class)
     public Page<SysUser> userTest(Integer pageNumber, Integer pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
         return (Page<SysUser>) jdbcTestMapper.userTest();
