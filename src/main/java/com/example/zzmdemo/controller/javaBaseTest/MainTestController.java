@@ -17,6 +17,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MainTestController {
 
     public static void main(String[] args) throws IllegalAccessException {
+        StringBuffer test=new StringBuffer();
+        test.append("22").append("33");
         test14();
 //        System.out.println("22".hashCode());
 //        AtomicInteger test=new AtomicInteger();
