@@ -21,7 +21,6 @@ public class CustomerObserver implements Observer{
     @Override
     public void update(int version) {
         this.version=version;
-        System.out.println("该杂志出新版本了");
         this.buy();
     }
 

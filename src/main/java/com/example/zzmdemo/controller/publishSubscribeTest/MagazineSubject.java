@@ -43,6 +43,7 @@ public class MagazineSubject implements Subject {
 
     //该杂志发行了新版本
     public synchronized void publish(){
+        System.out.println("该杂志出新版本了");
         //新版本
         this.version++;
         //信息更新完毕，通知所有观察者
