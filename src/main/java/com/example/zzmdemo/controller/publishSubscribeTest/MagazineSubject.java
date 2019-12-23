@@ -34,14 +34,15 @@ public class MagazineSubject implements Subject {
 
     @Override
     public void notifyObserver() {
-        for(int i=0;i<observers.size();i++){
-            Observer o=(Observer)observers.get(i);
-            o.update(version);
-        }
+        observers.forEach(o->o.update(version));
+//        for(int i=0;i<observers.size();i++){
+//            Observer o=observers.get(i);
+//            o.update(version);
+//        }
     }
 
     //该杂志发行了新版本
-    public void publish(){
+    public synchronized void publish(){
         //新版本
         this.version++;
         //信息更新完毕，通知所有观察者
