@@ -2,8 +2,11 @@ package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
 import com.example.zzmdemo.entity.SysUser;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,12 +16,20 @@ import java.util.List;
  * description
  * @date 17:28 2019/10/10
  */
-public class MainTestController {
+public class MainTestController  {
+
+    @Resource
+    private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-        StringBuffer test=new StringBuffer();
-        test.append("22").append("33");
-        test14();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddhhmmss");
+        LocalDateTime now=LocalDateTime.now();
+        String result=formatter.format(now);
+        System.out.println(result);
+//        InterfaceDemo.showMessage();
+//        StringBuffer test=new StringBuffer();
+//        test.append("22").append("33");
+//        test14();
 //        System.out.println("22".hashCode());
 //        AtomicInteger test=new AtomicInteger();
         //自增

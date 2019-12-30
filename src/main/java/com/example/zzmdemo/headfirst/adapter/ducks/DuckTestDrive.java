@@ -1,8 +1,9 @@
 package com.example.zzmdemo.headfirst.adapter.ducks;
 
-import headfirst.designpatterns.adapter.ducks.challenge.Drone;
-import headfirst.designpatterns.adapter.ducks.challenge.DroneAdapter;
-import headfirst.designpatterns.adapter.ducks.challenge.SuperDrone;
+
+import com.example.zzmdemo.headfirst.adapter.ducks.challenge.Drone;
+import com.example.zzmdemo.headfirst.adapter.ducks.challenge.DroneAdapter;
+import com.example.zzmdemo.headfirst.adapter.ducks.challenge.SuperDrone;
 
 public class DuckTestDrive {
 	public static void main(String[] args) {
