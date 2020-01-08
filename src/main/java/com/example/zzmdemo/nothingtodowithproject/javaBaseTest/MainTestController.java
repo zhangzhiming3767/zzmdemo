@@ -1,8 +1,11 @@
 package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
 import com.example.zzmdemo.entity.SysUser;
+import com.example.zzmdemo.utils.LocalDateUtils;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -22,10 +25,28 @@ public class MainTestController  {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddhhmmss");
-        LocalDateTime now=LocalDateTime.now();
-        String result=formatter.format(now);
-        System.out.println(result);
+//        emptyTest(" ");
+        StringBuilder test=new StringBuilder();
+        test.append("233");
+        test.append("qwe");
+        test.append("....");
+        test.delete(0,test.length());
+        System.out.println(test.toString());
+    }
+
+    public static void emptyTest(@NotBlank String id) {
+        System.out.println("进来啦");
+    }
+
+    public static void gc() {
+//        String test= LocalDateUtils.getWeekDayString(new Date());
+//        System.out.println(test);
+//
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddhhmmss");
+//        LocalDateTime now=LocalDateTime.now();
+//        String result=formatter.format(now);
+//        System.out.println(result);
 //        InterfaceDemo.showMessage();
 //        StringBuffer test=new StringBuffer();
 //        test.append("22").append("33");
