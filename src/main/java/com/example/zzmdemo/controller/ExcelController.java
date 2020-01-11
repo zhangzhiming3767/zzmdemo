@@ -44,7 +44,7 @@ public class ExcelController {
         params.put("name111", "李四");
         params.put("test", new Date());
         //
-        EasyPoiUtils.exportWord("word/aa.docx", "E:/1/00Ztesoft/余杭", "aaa.docx", params, request, response);
+        EasyPoiUtils.exportWord("word/aaa.docx", "E:/1/00Ztesoft/余杭", "aaa.docx", params, request, response);
     }
     @GetMapping("excel")
     public void excel(HttpServletRequest request, HttpServletResponse response) {
