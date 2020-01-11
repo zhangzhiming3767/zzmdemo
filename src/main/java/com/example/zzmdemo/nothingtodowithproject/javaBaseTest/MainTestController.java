@@ -6,12 +6,15 @@ import com.example.zzmdemo.utils.LocalDateUtils;
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -25,13 +28,9 @@ public class MainTestController  {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-//        emptyTest(" ");
-        StringBuilder test=new StringBuilder();
-        test.append("233");
-        test.append("qwe");
-        test.append("....");
-        test.delete(0,test.length());
-        System.out.println(test.toString());
+
+
+//        put("docx_word", new DocxRenderData(new File("~/segment.docx"), segments));
     }
 
     public static void emptyTest(@NotBlank String id) {
@@ -39,6 +38,13 @@ public class MainTestController  {
     }
 
     public static void gc() {
+        //        emptyTest(" ");
+//        StringBuilder test=new StringBuilder();
+//        test.append("233");
+//        test.append("qwe");
+//        test.append("....");
+//        test.delete(0,test.length());
+//        System.out.println(test.toString());
 //        String test= LocalDateUtils.getWeekDayString(new Date());
 //        System.out.println(test);
 //
