@@ -1,10 +1,10 @@
 package com.example.zzmdemo.controller;
 
+import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
-import com.example.zzmdemo.service.UserService;
 import com.example.zzmdemo.utils.EasyPoiUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +17,13 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,9 +53,10 @@ public class ExcelController {
         //
         EasyPoiUtils.exportWord("word/aaa.docx", "E:/1/00Ztesoft/余杭", "aaa.docx", params, request, response);
     }
+
     @GetMapping("excel")
     public void excel(HttpServletRequest request, HttpServletResponse response) {
-        List<SysUser> sysUserList=jdbcTestMapper.userTest();
+        List<SysUser> sysUserList = jdbcTestMapper.userTest();
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, null), SysUser.class, sysUserList);
         try {
             response.setCharacterEncoding("UTF-8");
@@ -65,11 +67,12 @@ public class ExcelController {
             throw new RuntimeException(e);
         }
     }
+
     /**
-    * @author :zhangzhiming
-    * description :请求https路径报错说 证书问题的，设置为忽略
-    * @date :Create in  2020/1/17 19:49
-    */
+     * @author :zhangzhiming
+     * description :请求https路径报错说 证书问题的，设置为忽略
+     * @date :Create in  2020/1/17 19:49
+     */
     public void test() throws Exception {
         trustAllHttpsCertificates();
         HttpURLConnection connection = (HttpURLConnection) new URL("https://yhdjtest.oss-cn-hangzhou.aliyuncs.com/yhdjexample/20200102/c79b1e0b-eaab-458e-b618-fc1b69e282eb.png").openConnection();
@@ -82,7 +85,32 @@ public class ExcelController {
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
             InputStream inputStream = connection.getInputStream();
+            byte[] data = readInputStream(inputStream);
+            FileOutputStream outStream = new FileOutputStream("yhdj-cadre-admin/src/main/resources/export/temporary/test.png");
+            //把文件数据写到输出流中
+            outStream.write(data);
+            outStream.close();
         }
+        ImageEntity image = new ImageEntity();
+        image.setHeight(250);
+        image.setWidth(200);
+        image.setUrl("yhdj-cadre-admin/src/main/resources/export/temporary/test.png");
+        image.setType(ImageEntity.URL);
+    }
+
+    public static byte[] readInputStream(InputStream inStream) throws Exception {
+        //构造一个ByteArrayOutputStream
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        //设置一个缓冲区
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        //判断输入流长度是否等于-1  ，即非空
+        while ((len = inStream.read(buffer)) != -1) {
+            //把缓冲区的内容写入到输出流中，从0开始读取，长度为len
+            outStream.write(buffer, 0, len);
+        }
+        inStream.close();
+        return outStream.toByteArray();
     }
 
     private static void trustAllHttpsCertificates() throws Exception {
@@ -93,6 +121,7 @@ public class ExcelController {
         sc.init(null, trustAllCerts, null);
         javax.net.ssl.HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
     }
+
     static class miTM implements javax.net.ssl.TrustManager, javax.net.ssl.X509TrustManager {
         @Override
         public java.security.cert.X509Certificate[] getAcceptedIssuers() {
@@ -106,11 +135,13 @@ public class ExcelController {
         public boolean isClientTrusted(java.security.cert.X509Certificate[] certs) {
             return true;
         }
+
         @Override
         public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType)
                 throws java.security.cert.CertificateException {
             return;
         }
+
         @Override
         public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType)
                 throws java.security.cert.CertificateException {
