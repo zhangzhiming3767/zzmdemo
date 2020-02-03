@@ -38,7 +38,7 @@ public class RemoteControlWithUndo {
 	public void undoButtonWasPushed() {
 		undoCommand.undo();
 	}
-  
+	@Override
 	public String toString() {
 		StringBuffer stringBuff = new StringBuffer();
 		stringBuff.append("\n------ Remote Control -------\n");

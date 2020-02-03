@@ -11,7 +11,7 @@ public class ChicagoStyleVeggiePizza extends Pizza {
 		toppings.add("Spinach");
 		toppings.add("Eggplant");
 	}
- 
+	@Override
 	void cut() {
 		System.out.println("Cutting the pizza into square slices");
 	}

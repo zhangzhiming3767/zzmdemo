@@ -8,12 +8,12 @@ public class DimmerLightOffCommand implements Command {
 		this.light = light;
 		prevLevel = 100;
 	}
-
+	@Override
 	public void execute() {
 		prevLevel = light.getLevel();
 		light.off();
 	}
-
+	@Override
 	public void undo() {
 		light.dim(prevLevel);
 	}

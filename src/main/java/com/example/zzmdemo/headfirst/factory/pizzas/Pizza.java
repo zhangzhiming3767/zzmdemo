@@ -27,7 +27,7 @@ abstract public class Pizza {
 	public void box() {
 		System.out.println("Boxing " + name);
 	}
-
+	@Override
 	public String toString() {
 		// code to display pizza name and ingredients
 		StringBuffer display = new StringBuffer();

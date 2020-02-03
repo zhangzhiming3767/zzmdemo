@@ -12,7 +12,7 @@ public class ChicagoStylePepperoniPizza extends Pizza {
 		toppings.add("Eggplant");
 		toppings.add("Sliced Pepperoni");
 	}
- 
+	@Override
 	void cut() {
 		System.out.println("Cutting the pizza into square slices");
 	}

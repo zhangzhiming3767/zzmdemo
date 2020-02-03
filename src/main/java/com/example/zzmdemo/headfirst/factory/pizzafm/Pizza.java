@@ -33,7 +33,7 @@ public abstract class Pizza {
 	public String getName() {
 		return name;
 	}
-
+	@Override
 	public String toString() {
 		StringBuffer display = new StringBuffer();
 		display.append("---- " + name + " ----\n");
