@@ -1,6 +1,7 @@
 package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
 import com.example.zzmdemo.entity.SysUser;
+import com.example.zzmdemo.utils.DateUtil;
 import com.example.zzmdemo.utils.LocalDateUtils;
 
 import javax.annotation.Resource;
@@ -28,9 +29,14 @@ public class MainTestController  {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-
-
-//        put("docx_word", new DocxRenderData(new File("~/segment.docx"), segments));
+        Date firstDate = DateUtil.getFirstDateOfMonth(new Date());
+        Date lastDate = DateUtil.getLastDateOfMonth(new Date());
+        int month = DateUtil.getMonth(new Date());
+        Date startTime=DateUtil.getStartTime();
+        Date endTime=DateUtil.getEndTime();
+        Date test=DateUtil.getLastMothStartTime(-1);
+        Date test2=DateUtil.getLastMothEndTime(-1);
+        System.out.println(month);
     }
 
     public static void emptyTest(@NotBlank String id) {
@@ -38,6 +44,16 @@ public class MainTestController  {
     }
 
     public static void gc() {
+        List<Integer> idList=new ArrayList<>();
+        for(int i=0;i<392;i++){
+            idList.add(i);
+        }
+        int counts=(idList.size()%100>0?idList.size()/100+1:idList.size()/100);
+        List<Integer> ids=new ArrayList<>();
+        for(int j=0;j<counts;j++){
+            ids=idList.subList(j*100,j*100+(j==counts-1?idList.size()%100:100));
+        }
+        System.out.println(ids.size());
         //        emptyTest(" ");
 //        StringBuilder test=new StringBuilder();
 //        test.append("233");
