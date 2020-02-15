@@ -30,6 +30,18 @@ public class StreamTestController {
 //        System.out.println("所有数之和 : " + stats.getSum());
 //        System.out.println("平均数 : " + stats.getAverage());
 
+        //排序
+        List<Integer> test=new ArrayList<>();
+        test.add(1);
+        test.add(12);
+        test.add(2);
+        test.add(3);
+        test.add(11);
+        test.add(10);
+        test.add(8);
+        test=test.stream().sorted().collect(Collectors.toList());
+        test=test.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+//        stream().sorted(Comparator.comparing(FillVo::getGmtCreate).reversed()).collect(Collectors.toList());
 
 
     }

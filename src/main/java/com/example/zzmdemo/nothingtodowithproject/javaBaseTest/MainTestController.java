@@ -17,10 +17,8 @@ import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zhangzhiming
@@ -33,14 +31,18 @@ public class MainTestController  {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-        Date firstDate = DateUtil.getFirstDateOfMonth(new Date());
-        Date lastDate = DateUtil.getLastDateOfMonth(new Date());
-        int month = DateUtil.getMonth(new Date());
-        Date startTime=DateUtil.getStartTime();
-        Date endTime=DateUtil.getEndTime();
-        Date test=DateUtil.getLastMothStartTime(-1);
-        Date test2=DateUtil.getLastMothEndTime(-1);
-        System.out.println(month);
+        List<Integer> test=new ArrayList<>();
+        test.add(1);
+        test.add(12);
+        test.add(2);
+        test.add(3);
+        test.add(11);
+        test.add(10);
+        test.add(8);
+        test=test.stream().sorted().collect(Collectors.toList());
+        test=test.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+//        stream().sorted(Comparator.comparing(FillVo::getGmtCreate).reversed()).collect(Collectors.toList());
+        System.out.println("");
     }
 
 
