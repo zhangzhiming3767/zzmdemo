@@ -3,10 +3,14 @@ package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.utils.DateUtil;
 import com.example.zzmdemo.utils.LocalDateUtils;
+import com.github.pagehelper.Page;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.ss.formula.functions.T;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
@@ -39,6 +43,8 @@ public class MainTestController  {
         System.out.println(month);
     }
 
+
+
     public static void emptyTest(@NotBlank String id) {
         System.out.println("进来啦");
     }
@@ -54,6 +60,14 @@ public class MainTestController  {
             ids=idList.subList(j*100,j*100+(j==counts-1?idList.size()%100:100));
         }
         System.out.println(ids.size());
+        Date firstDate = DateUtil.getFirstDateOfMonth(new Date());
+        Date lastDate = DateUtil.getLastDateOfMonth(new Date());
+        int month = DateUtil.getMonth(new Date());
+        Date startTime=DateUtil.getStartTime();
+        Date endTime=DateUtil.getEndTime();
+        Date test=DateUtil.getLastMothStartTime(-1);
+        Date test2=DateUtil.getLastMothEndTime(-1);
+        System.out.println(month);
         //        emptyTest(" ");
 //        StringBuilder test=new StringBuilder();
 //        test.append("233");
@@ -111,6 +125,15 @@ public class MainTestController  {
             f.setAccessible(true);
             System.out.println("属性名:" + f.getName() + " 属性值:" + f.get(sysUser));
         }
+    }
+    /**
+    * @author :zhangzhiming
+    * description :泛型
+    * @date :Create in  2020/2/15 15:46
+    */
+    public static <T> List<T> page(List<T> list, @NotNull Integer current, @NotNull Integer pageSize) {
+
+        return null;
     }
 
     public static void test13() {
