@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,18 +32,23 @@ public class MainTestController  {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-        List<Integer> test=new ArrayList<>();
-        test.add(1);
-        test.add(12);
-        test.add(2);
-        test.add(3);
-        test.add(11);
-        test.add(10);
-        test.add(8);
-        test=test.stream().sorted().collect(Collectors.toList());
-        test=test.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-//        stream().sorted(Comparator.comparing(FillVo::getGmtCreate).reversed()).collect(Collectors.toList());
-        System.out.println("");
+        float a=0.3f;
+        float b=0.2f;
+        float c=a+b;
+        float c2=a-b;
+        float c3=a*b;
+        float c4=a/b;
+//        BigDecimal d=new BigDecimal(0.3);
+//        BigDecimal e=new BigDecimal(0.2);
+        BigDecimal d=new BigDecimal(Double.toString(0.3));
+        BigDecimal e=new BigDecimal(Double.toString(0.2));
+//        BigDecimal d=new BigDecimal(3);
+//        BigDecimal e=new BigDecimal(2);
+        BigDecimal f=d.add(e);
+        BigDecimal g=d.subtract(e);
+        BigDecimal h=d.multiply(e);
+        BigDecimal j=d.divide(e,2,BigDecimal.ROUND_HALF_UP);
+        System.out.println(c);
     }
 
 
