@@ -1,5 +1,7 @@
 package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
+import com.example.zzmdemo.dto.BaseTypeTest;
+import com.example.zzmdemo.dto.TestTwo;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.utils.DateUtil;
 import com.example.zzmdemo.utils.LocalDateUtils;
@@ -26,31 +28,48 @@ import java.util.stream.Collectors;
  * description
  * @date 17:28 2019/10/10
  */
-public class MainTestController  {
+public class MainTestController {
 
     @Resource
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-        float a=0.3f;
-        float b=0.2f;
-        float c=a+b;
-        float c2=a-b;
-        float c3=a*b;
-        float c4=a/b;
-//        BigDecimal d=new BigDecimal(0.3);
-//        BigDecimal e=new BigDecimal(0.2);
-        BigDecimal d=new BigDecimal(Double.toString(0.3));
-        BigDecimal e=new BigDecimal(Double.toString(0.2));
-//        BigDecimal d=new BigDecimal(3);
-//        BigDecimal e=new BigDecimal(2);
-        BigDecimal f=d.add(e);
-        BigDecimal g=d.subtract(e);
-        BigDecimal h=d.multiply(e);
-        BigDecimal j=d.divide(e,2,BigDecimal.ROUND_HALF_UP);
-        System.out.println(c);
+        List<TestTwo> testTwoList=new ArrayList<>();
+        TestTwo testTwo=new TestTwo();
+        testTwo.setStrings(new ArrayList<>());
+        testTwoList.forEach(testTwo1 -> {
+            List<String> strings=new ArrayList<>();
+            strings.add("233");
+
+            testTwo1.getStrings().add("233");
+        });
+        //baseTypeTest();
+        System.out.println("");
     }
 
+    /**
+    * @author :zhangzhiming
+    * description :八大基础类型与封装类型默认值测试
+    * @date :Create in  2020/2/16 16:54
+    */
+    private static void baseTypeTest() {
+        BaseTypeTest baseTypeTest=new BaseTypeTest();
+        System.out.println("c");
+    }
+
+    /**
+     * @author :zhangzhiming
+     * description : Integer 测试
+     * @date :Create in  2020/2/16 16:54
+     */
+    private static void integerTest() {
+        //大于127后 == 返回就是false
+        Integer a = 127;
+        Integer b = 127;
+        boolean j1 = a == b;
+        boolean j2 = a.equals(b);
+        System.out.println();
+    }
 
 
     public static void emptyTest(@NotBlank String id) {
@@ -58,23 +77,45 @@ public class MainTestController  {
     }
 
     public static void gc() {
-        List<Integer> idList=new ArrayList<>();
-        for(int i=0;i<392;i++){
+        float a = 0.3f;
+        float b = 0.2f;
+        float c = a + b;
+        float c2 = a - b;
+        float c3 = a * b;
+        float c4 = a / b;
+        double a1 = 0.3;
+        double a2 = 0.2;
+        double a3 = a1 + a2;
+        double a4 = a1 - a2;
+        double a5 = a1 * a2;
+        double a6 = a1 / a2;
+//        BigDecimal d=new BigDecimal(0.3);
+//        BigDecimal e=new BigDecimal(0.2);
+        BigDecimal d = new BigDecimal(Double.toString(0.3));
+        BigDecimal e = new BigDecimal(Double.toString(0.2));
+//        BigDecimal d=new BigDecimal(3);
+//        BigDecimal e=new BigDecimal(2);
+        BigDecimal f = d.add(e);
+        BigDecimal g = d.subtract(e);
+        BigDecimal h = d.multiply(e);
+        BigDecimal j = d.divide(e, 2, BigDecimal.ROUND_HALF_UP);
+        List<Integer> idList = new ArrayList<>();
+        for (int i = 0; i < 392; i++) {
             idList.add(i);
         }
-        int counts=(idList.size()%100>0?idList.size()/100+1:idList.size()/100);
-        List<Integer> ids=new ArrayList<>();
-        for(int j=0;j<counts;j++){
-            ids=idList.subList(j*100,j*100+(j==counts-1?idList.size()%100:100));
-        }
-        System.out.println(ids.size());
+//        int counts=(idList.size()%100>0?idList.size()/100+1:idList.size()/100);
+//        List<Integer> ids=new ArrayList<>();
+//        for(int j=0;j<counts;j++){
+//            ids=idList.subList(j*100,j*100+(j==counts-1?idList.size()%100:100));
+//        }
+//        System.out.println(ids.size());
         Date firstDate = DateUtil.getFirstDateOfMonth(new Date());
         Date lastDate = DateUtil.getLastDateOfMonth(new Date());
         int month = DateUtil.getMonth(new Date());
-        Date startTime=DateUtil.getStartTime();
-        Date endTime=DateUtil.getEndTime();
-        Date test=DateUtil.getLastMothStartTime(-1);
-        Date test2=DateUtil.getLastMothEndTime(-1);
+        Date startTime = DateUtil.getStartTime();
+        Date endTime = DateUtil.getEndTime();
+        Date test = DateUtil.getLastMothStartTime(-1);
+        Date test2 = DateUtil.getLastMothEndTime(-1);
         System.out.println(month);
         //        emptyTest(" ");
 //        StringBuilder test=new StringBuilder();
@@ -122,35 +163,36 @@ public class MainTestController  {
 //        System.out.println(a);
     }
 
-    public  static void test14() throws IllegalAccessException {
-        SysUser sysUser=new SysUser();
+    public static void test14() throws IllegalAccessException {
+        SysUser sysUser = new SysUser();
         sysUser.setId("233");
         sysUser.setIdCard("qwe");
         Class cls = sysUser.getClass();
         Field[] fields = cls.getDeclaredFields();
-        for(int i=0; i<fields.length; i++){
+        for (int i = 0; i < fields.length; i++) {
             Field f = fields[i];
             f.setAccessible(true);
             System.out.println("属性名:" + f.getName() + " 属性值:" + f.get(sysUser));
         }
     }
+
     /**
-    * @author :zhangzhiming
-    * description :泛型
-    * @date :Create in  2020/2/15 15:46
-    */
+     * @author :zhangzhiming
+     * description :泛型
+     * @date :Create in  2020/2/15 15:46
+     */
     public static <T> List<T> page(List<T> list, @NotNull Integer current, @NotNull Integer pageSize) {
 
         return null;
     }
 
     public static void test13() {
-        List<String> test1=new ArrayList<>();
+        List<String> test1 = new ArrayList<>();
         test1.add("22");
         test1.add("33");
         test1.add("55");
-        for(String test:test1){
-            test=test+"1";
+        for (String test : test1) {
+            test = test + "1";
         }
         System.out.println(test1);
     }
@@ -181,9 +223,9 @@ public class MainTestController  {
         //10
         int b = 2;
         //11
-        int c=3;
-        System.out.println("第一个："+(2 ^ 1));
-        System.out.println("第二个："+(2 ^ 3));
+        int c = 3;
+        System.out.println("第一个：" + (2 ^ 1));
+        System.out.println("第二个：" + (2 ^ 3));
     }
 
     /**
