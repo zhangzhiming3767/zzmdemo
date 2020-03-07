@@ -34,15 +34,16 @@ public class MainTestController {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-        List<TestTwo> testTwoList=new ArrayList<>();
-        TestTwo testTwo=new TestTwo();
-        testTwo.setStrings(new ArrayList<>());
-        testTwoList.forEach(testTwo1 -> {
-            List<String> strings=new ArrayList<>();
-            strings.add("233");
+//        BigDecimal e=new BigDecimal(0.2);
+        BigDecimal d = new BigDecimal(Double.toString(0.3));
+        BigDecimal e = new BigDecimal(Double.toString(0.2));
+//        BigDecimal d=new BigDecimal(3);
+//        BigDecimal e=new BigDecimal(2);
+        BigDecimal f = d.add(e);
+        BigDecimal g = d.subtract(e);
+        BigDecimal h = d.multiply(e);
+        BigDecimal j = d.divide(e, 2, BigDecimal.ROUND_HALF_UP);
 
-            testTwo1.getStrings().add("233");
-        });
         //baseTypeTest();
         System.out.println("");
     }
@@ -102,6 +103,22 @@ public class MainTestController {
         List<Integer> idList = new ArrayList<>();
         for (int i = 0; i < 392; i++) {
             idList.add(i);
+        }
+        List<TestTwo> testTwoList=new ArrayList<>();
+        TestTwo testTwo=new TestTwo();
+        testTwo.setStrings(new ArrayList<>());
+        try{
+            testTwoList.forEach(testTwo1 -> {
+                int a21=0;
+                int b21=1;
+                System.out.println(b/a);
+                List<String> strings=new ArrayList<>();
+                strings.add("233");
+                testTwo1.getStrings().add("233");
+                throw new RuntimeException("111");
+            });
+        }catch (Exception ee){
+            System.out.println("");
         }
 //        int counts=(idList.size()%100>0?idList.size()/100+1:idList.size()/100);
 //        List<Integer> ids=new ArrayList<>();
