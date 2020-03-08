@@ -34,29 +34,12 @@ public class MainTestController {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-//        BigDecimal e=new BigDecimal(0.2);
-        BigDecimal d = new BigDecimal(Double.toString(0.3));
-        BigDecimal e = new BigDecimal(Double.toString(0.2));
-//        BigDecimal d=new BigDecimal(3);
-//        BigDecimal e=new BigDecimal(2);
-        BigDecimal f = d.add(e);
-        BigDecimal g = d.subtract(e);
-        BigDecimal h = d.multiply(e);
-        BigDecimal j = d.divide(e, 2, BigDecimal.ROUND_HALF_UP);
 
-        //baseTypeTest();
+
+        integerTest();
         System.out.println("");
     }
 
-    /**
-    * @author :zhangzhiming
-    * description :八大基础类型与封装类型默认值测试
-    * @date :Create in  2020/2/16 16:54
-    */
-    private static void baseTypeTest() {
-        BaseTypeTest baseTypeTest=new BaseTypeTest();
-        System.out.println("c");
-    }
 
     /**
      * @author :zhangzhiming
@@ -69,9 +52,45 @@ public class MainTestController {
         Integer b = 127;
         boolean j1 = a == b;
         boolean j2 = a.equals(b);
+        String s1="aaa";
+        String s2="aaa";
+        String s4="a";
+        String s5="sabcsszxczxvzxvzxvzxvzbbz";
+        char []t8=s5.toCharArray();
+        int t7=s5.indexOf("bb",2);
+
+        int al=s1.length();
+        String s3=new String("aaa");
+        boolean t1=s1==s2;
+        boolean t2=s1==s3;
+        boolean t3=s1.equals(s3);
+        boolean t4=Objects.equals("aa","aa");
+        boolean t5=Objects.equals(null,null);
+        boolean t6=Objects.equals(s2,s3);
         System.out.println();
     }
 
+    /**
+     * @author :zhangzhiming
+     * description :八大基础类型与封装类型默认值测试
+     * @date :Create in  2020/2/16 16:54
+     */
+    private static void baseTypeTest() {
+        BaseTypeTest baseTypeTest=new BaseTypeTest();
+        System.out.println("c");
+    }
+
+    private static void bigTest(){
+        //        BigDecimal e=new BigDecimal(0.2);
+        BigDecimal d = new BigDecimal(Double.toString(0.3));
+        BigDecimal e = new BigDecimal(Double.toString(0.2));
+//        BigDecimal d=new BigDecimal(3);
+//        BigDecimal e=new BigDecimal(2);
+        BigDecimal f = d.add(e);
+        BigDecimal g = d.subtract(e);
+        BigDecimal h = d.multiply(e);
+        BigDecimal j = d.divide(e, 2, BigDecimal.ROUND_HALF_UP);
+    }
 
     public static void emptyTest(@NotBlank String id) {
         System.out.println("进来啦");
