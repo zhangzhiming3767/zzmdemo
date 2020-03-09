@@ -14,8 +14,10 @@ import java.util.Arrays;
 public class KMP {
 
     public static void main(String[] args) {
-        getNext("abaabcac");
-        getNextArray("abaabcac".toCharArray());
+        getNextTest("aac");
+//        getNext("ababaa");
+//        getNext("abaabcac");
+//        getNextArray("abaabcac".toCharArray());
 //        System.out.println(kmpMatch("abcabaabaabcacb", "abaabcac"));
     }
     /**
@@ -39,6 +41,37 @@ public class KMP {
         System.out.println(Arrays.toString(next));
         return next;
     }
+
+    /**
+    * @author :zhangzhiming
+    * description :根据理解，自己写一个获取next数据的方法
+    * @date :Create in  2020/3/8 21:08
+    */
+    public static int[] getNextTest(String ps) {
+        char[] p = ps.toCharArray();
+        int[] next = new int[p.length];
+        next[0] = -1;
+        next[1] = 0;
+        int j = 1;
+        int k = 0;
+        while (j < p.length - 1) {
+            if (k == -1 ) {
+                next[++j] = 0;
+                k=0;
+            }else if( p[j] == p[k]){
+                // k值实际是j位前的子串的最大重复子串的长度
+                k=k+1;
+                //往后移动一位
+                j++;
+                next[j] = k;
+            } else {
+                k = next[k];
+            }
+        }
+        System.out.println(Arrays.toString(next));
+        return next;
+    }
+
     /**
      * 对主串s和模式串t进行KMP模式匹配
      *
