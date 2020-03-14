@@ -5,15 +5,18 @@ import com.example.zzmdemo.dto.TestTwo;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.utils.DateUtil;
 import com.example.zzmdemo.utils.LocalDateUtils;
+import com.example.zzmdemo.utils.OtherUtils;
 import com.github.pagehelper.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.unit.DataUnit;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
@@ -35,14 +38,11 @@ public class MainTestController {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args) throws IllegalAccessException {
-
-        SysUser sysUser=new SysUser();
-        sysUser.setId("222");
-        sysUser.setIdCard("3333");
-        SysUser userTwo=new SysUser();
-        userTwo.setLoginName("name");
-        userTwo.setPhone("123");
-        BeanUtils.copyProperties(sysUser,userTwo);
+        List<String> testlist=new ArrayList<>();
+        for(int i=0;i<1100;i++){
+            testlist.add("第"+i);
+        }
+        List<List<String>> listTest= OtherUtils.averageAssign(testlist,999);
 
 //        integerTest();
         System.out.println("");
@@ -55,6 +55,17 @@ public class MainTestController {
      * @date :Create in  2020/2/16 16:54
      */
     private static void integerTest() {
+        Date test=DateUtil.getYearEndTime(0L,"GMT+8:00");
+        Integer year=DateUtil.getYear(new Date());
+
+
+        SysUser sysUser=new SysUser();
+        sysUser.setId("222");
+        sysUser.setIdCard("3333");
+        SysUser userTwo=new SysUser();
+        userTwo.setLoginName("name");
+        userTwo.setPhone("123");
+        BeanUtils.copyProperties(sysUser,userTwo);
         //大于127后 == 返回就是false
         Integer a = 127;
         Integer b = 127;

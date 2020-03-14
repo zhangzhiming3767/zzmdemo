@@ -7,10 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
 * @author :zhangzhiming
@@ -313,7 +310,27 @@ public class DateUtil {
         c.set(Calendar.DAY_OF_MONTH, c.getActualMaximum(Calendar.DAY_OF_MONTH));
         return c.getTime();
     }
-
+    /**
+     * 获取当年的最后时间戳
+     *
+     * @param timeStamp 毫秒级时间戳
+     * @param timeZone  如 GMT+8:00
+     * @return
+     */
+    public static Date getYearEndTime(Long timeStamp, String timeZone) {
+        Calendar calendar = Calendar.getInstance();// 获取当前日期
+        calendar.setTimeZone(TimeZone.getTimeZone(timeZone));
+        calendar.setTimeInMillis(timeStamp);
+        int year = calendar.get(Calendar.YEAR);
+        calendar.clear();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        calendar.roll(Calendar.DAY_OF_YEAR, -1);
+        return calendar.getTime();
+    }
     /**
     * @author :zhangzhiming
     * description :获取今天的开始时间
