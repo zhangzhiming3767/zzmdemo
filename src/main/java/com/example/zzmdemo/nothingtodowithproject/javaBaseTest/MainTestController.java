@@ -8,6 +8,7 @@ import com.example.zzmdemo.utils.LocalDateUtils;
 import com.github.pagehelper.Page;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.poi.ss.formula.functions.T;
+import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotBlank;
@@ -35,8 +36,15 @@ public class MainTestController {
 
     public static void main(String[] args) throws IllegalAccessException {
 
+        SysUser sysUser=new SysUser();
+        sysUser.setId("222");
+        sysUser.setIdCard("3333");
+        SysUser userTwo=new SysUser();
+        userTwo.setLoginName("name");
+        userTwo.setPhone("123");
+        BeanUtils.copyProperties(sysUser,userTwo);
 
-        integerTest();
+//        integerTest();
         System.out.println("");
     }
 
