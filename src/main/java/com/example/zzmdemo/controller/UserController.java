@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping("/getUserList")
-    public PageResponse<SysUser> userTest(Integer pageNumber, Integer pageSize, HttpServletResponse response) {
+    public PageResponse<SysUser> userTest(Integer pageNumber, Integer pageSize, HttpServletResponse response, HttpServletRequest request) {
         Page<SysUser> sysUserPage = jdbcTestService.userTest(pageNumber, pageSize);
         return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
     }

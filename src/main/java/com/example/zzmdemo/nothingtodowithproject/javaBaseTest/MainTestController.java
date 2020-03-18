@@ -39,12 +39,17 @@ public class MainTestController {
 
     public static void main(String[] args) throws IllegalAccessException {
         List<String> testlist=new ArrayList<>();
-        for(int i=0;i<1100;i++){
-            testlist.add("第"+i);
+        testlist.add("233");
+        testlist.add("666");
+        Integer testa1[]=new Integer[6];
+        for(int i=0;i<6;i++){
+            testa1[i]=i;
         }
-        List<List<String>> listTest= OtherUtils.averageAssign(testlist,999);
+        List<Integer> arrToList=Arrays.asList(testa1);
+        testa1[2]=33;
+        Map<String,String> newMapTtest=new HashMap<>();
+        newMapTtest.put("第一个","aaa");
 
-//        integerTest();
         System.out.println("");
     }
 
@@ -55,6 +60,10 @@ public class MainTestController {
      * @date :Create in  2020/2/16 16:54
      */
     private static void integerTest() {
+        Set<String> test233=new HashSet<>();
+        Boolean result1=test233.add("233");
+        Boolean result2=test233.add("233");
+
         Date test=DateUtil.getYearEndTime(0L,"GMT+8:00");
         Integer year=DateUtil.getYear(new Date());
 
