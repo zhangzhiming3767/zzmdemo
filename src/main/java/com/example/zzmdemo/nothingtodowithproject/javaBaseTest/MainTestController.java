@@ -37,7 +37,17 @@ public class MainTestController {
     @Resource
     private InterfaceDemo interfaceDemo;
 
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args){
+        List<Integer> list1=new ArrayList<>();
+        List<Integer> list2=new ArrayList<>();
+        list1.add(1);
+        list1.add(2);
+        list2.add(2);
+        list2.add(3);
+        list1.retainAll(list2);
+
+        String stest="%22%2Balert%2838%29%2B33232%.png";
+        int test=1%3;
         List<String> testlist=new ArrayList<>();
         testlist.add("233");
         testlist.add("666");

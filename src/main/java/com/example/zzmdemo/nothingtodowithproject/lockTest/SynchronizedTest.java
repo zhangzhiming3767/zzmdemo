@@ -12,18 +12,33 @@ package com.example.zzmdemo.nothingtodowithproject.lockTest;
 public class SynchronizedTest implements Runnable {
 
     public int count=0;
+    public volatile int count2=0;
+    public int count3=0;
 
     public static void main(String[] args) {
         SynchronizedTest r = new SynchronizedTest();
-        for (int a = 0; a < 3000; a++) {
+        for (int a = 0; a < 10000; a++) {
         Thread t = new Thread(r);
             t.start();
+//            t.run();
+//            try {
+//                t.wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
         }
+
     }
 
     @Override
     public void run() {
-        System.out.println(count++);
+        System.out.println("111:"+(count++));
+        System.out.println("222:"+(count2++));
+        synchronized(this) {
+//            this.notify();
+            System.out.println("333:"+(count3++));
+        }
 //            test1(0);
 //            test2(1);
     }
