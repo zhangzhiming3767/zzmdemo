@@ -24,6 +24,8 @@ public class MybanRunnable implements Runnable{
             System.out.println("账户11111余额是---"+bank.getAccount());
             bank.save2(1);
             System.out.println("账户2222余额是---"+bank.getAccount2());
+            bank.save3(1);
+            System.out.println("账户2222余额是---"+bank.getAccount3());
         }
 
     }

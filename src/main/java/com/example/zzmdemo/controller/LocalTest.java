@@ -33,6 +33,7 @@ public class LocalTest {
         System.out.println("111:"+(r.count));
         System.out.println("222:"+(r.count3));
         System.out.println("333:"+(r.count2));
+        System.out.println("444:"+(r.getAccount3()));
         return new SuccessResponse();
     }
 }

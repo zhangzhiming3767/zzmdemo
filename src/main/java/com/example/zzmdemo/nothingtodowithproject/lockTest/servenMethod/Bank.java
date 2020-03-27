@@ -32,9 +32,23 @@ public class Bank {
     public void save2(int money) {
         account2+=money;
     }
+    //使用ThreadLocal类管理共享变量account
+    private static ThreadLocal<Integer> account3 = new ThreadLocal<Integer>(){
+        @Override
+        protected Integer initialValue(){
+            return 100;
+        }
+    };
+    public void save3(int money){
+        account3.set(account3.get()+money);
+    }
+    public int getAccount3(){
+        return account3.get();
+    }
+
+
     public void userThread() {
         Bank bank = new Bank();
-
         MybanRunnable my1 = new MybanRunnable(bank);
         for(int i=0;i<100;i++){
             System.out.println("线程"+i);
