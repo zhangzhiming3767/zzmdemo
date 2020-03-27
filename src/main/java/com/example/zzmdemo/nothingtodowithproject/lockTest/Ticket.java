@@ -13,26 +13,27 @@ import java.util.concurrent.locks.ReentrantLock;
  * @since 2019/12/11 17:06
  */
 public class Ticket implements Runnable {
-    private int tick = 100;
+    private int tick = 1000;
     private Lock lock = new ReentrantLock();
-    private  static int count=0;
-    private Boolean judge=true;
+    private static int count = 0;
+    private Boolean judge = true;
+
     @Override
     public void run() {
         while (judge) {
             lock.lock();
             try {
                 if (tick > 0) {
-                    try {
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Thread.sleep(20);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
                     System.out.println(Thread.currentThread().getName() + " 完成售票，余票为 " + --tick);
                     count++;
-                }else {
-                    judge=false;
-                    System.out.println("最后卖了："+count);
+                } else {
+                    judge = false;
+                    System.out.println("最后卖了：" + count);
                 }
             } finally {
                 lock.unlock();
@@ -40,4 +41,22 @@ public class Ticket implements Runnable {
             }
         }
     }
+
+//    @Override
+//    public void run() {
+//        while (judge) {
+//            if (tick > 0) {
+//                try {
+//                    Thread.sleep(20);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                System.out.println(Thread.currentThread().getName() + " 完成售票，余票为 " + --tick);
+//                count++;
+//            } else {
+//                judge = false;
+//                System.out.println("最后卖了：" + count);
+//            }
+//        }
+//    }
 }
