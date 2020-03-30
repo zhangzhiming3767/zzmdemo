@@ -24,27 +24,6 @@ public class JdbcTestController {
     @Resource
     private JdbcTestService jdbcTestService;
 
-    /**
-     * @author zhangzhiming
-     * description
-     * @date 19:13 2019/10/9
-     */
-    @RequestMapping("/getUserList")
-    public PageResponse<SysUser> userTest(Integer pageNumber, Integer pageSize, HttpServletResponse response) {
-//         response.setHeader("Access-Control-Allow-Origin", "*");
-//         response.setHeader("Access-Control-Allow-Methods", "POST");
-        Page<SysUser> sysUserPage = jdbcTestService.userTest(pageNumber, pageSize);
-        return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
-    }
 
-    @RequestMapping("/addUser")
-    public Response addUser(@RequestBody SysUser sysUser) {
-        return new SuccessResponse(jdbcTestService.addUser(sysUser));
-    }
-
-    @RequestMapping("/updateUser")
-    public Response updateUser(@RequestBody SysUser sysUser) {
-        return new SuccessResponse(jdbcTestService.updateUser(sysUser));
-    }
 
 }

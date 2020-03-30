@@ -33,7 +33,6 @@ public class JdbcTestService {
     }
 
     public String addUser(SysUser sysUser) {
-//        UUID test = idGenerator.generateId();
         sysUser.setId(idGenerator.nextId());
         sysUser.setCreateTime(new Date());
         int count = jdbcTestMapper.insert(sysUser);
