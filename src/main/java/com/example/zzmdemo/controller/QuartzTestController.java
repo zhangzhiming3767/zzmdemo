@@ -64,7 +64,7 @@ public class QuartzTestController {
     @PostConstruct
     @RequestMapping(value = "/initializingTest", method = RequestMethod.GET)
     public Response initializing() {
-        System.err.println("看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗");
+        System.err.println("定时任务初始化内容，看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗看到了吗");
         return new SuccessResponse();
     }
 

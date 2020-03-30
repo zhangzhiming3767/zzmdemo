@@ -26,7 +26,7 @@ public class JdbcTestService {
      * description
      * @date 19:29 2019/10/9
      */
-    @Transactional(propagation=Propagation.MANDATORY,rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public Page<SysUser> userTest(Integer pageNumber, Integer pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
         return (Page<SysUser>) jdbcTestMapper.userTest();
