@@ -8,8 +8,11 @@ import com.example.zzmdemo.entity.response.SuccessResponse;
 import com.example.zzmdemo.service.JdbcTestService;
 import com.example.zzmdemo.service.UserService;
 import com.github.pagehelper.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/user")
+@Api(value = "测试接口", tags = "UserController", description = "测试接口相关")
 public class UserController {
     @Resource
     private UserService userService;
@@ -39,7 +43,8 @@ public class UserController {
         return new ObjectResponse<>(userService.userLogin(loginName, password));
     }
 
-    @RequestMapping("/getUserList")
+    @RequestMapping(value ="/getUserList",method = RequestMethod.POST)
+    @ApiOperation(value = "获取用户列表", notes = "根据id来获取用户详细信息")
     public PageResponse<SysUser> userTest(Integer pageNumber, Integer pageSize, HttpServletResponse response, HttpServletRequest request) {
         Page<SysUser> sysUserPage = jdbcTestService.userTest(pageNumber, pageSize);
         return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
