@@ -3,11 +3,10 @@ package com.example.zzmdemo.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Table;
 import java.io.Serializable;
 
 @Data
-@Table(name = "sys_menu")
+//@Table(name = "sys_menu")
 @EqualsAndHashCode(callSuper = false)
 public class SysMenu extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 8082354824176117891L;

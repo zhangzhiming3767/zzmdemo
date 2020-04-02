@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author zhangzhiming
@@ -43,13 +44,17 @@ public class UserController {
         return new ObjectResponse<>(userService.userLogin(loginName, password));
     }
 
-    @RequestMapping(value ="/getUserList",method = RequestMethod.POST)
+    @RequestMapping(value ="/getUserListPage",method = RequestMethod.POST)
     @ApiOperation(value = "获取用户列表", notes = "根据id来获取用户详细信息")
     public PageResponse<SysUser> userTest(Integer pageNumber, Integer pageSize, HttpServletResponse response, HttpServletRequest request) {
         Page<SysUser> sysUserPage = jdbcTestService.userTest(pageNumber, pageSize);
         return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
     }
-
+    @RequestMapping(value ="/getUserList",method = RequestMethod.POST)
+    @ApiOperation(value = "获取用户列表", notes = "根据id来获取用户详细信息")
+    public List<SysUser> getUserList( HttpServletResponse response, HttpServletRequest request) {
+        return userService.getUserList();
+    }
     @RequestMapping("/addUser")
     public Response addUser(@RequestBody SysUser sysUser) {
         return new SuccessResponse(jdbcTestService.addUser(sysUser));

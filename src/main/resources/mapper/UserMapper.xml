@@ -5,5 +5,7 @@
     <select id="userLogin" resultType="com.example.zzmdemo.entity.SysUser">
       select * from sys_user where login_name=#{loginName} and password=#{password}
     </select>
-
+    <select id="userTest" resultType="com.example.zzmdemo.entity.SysUser">
+      select * from sys_user
+    </select>
 </mapper>

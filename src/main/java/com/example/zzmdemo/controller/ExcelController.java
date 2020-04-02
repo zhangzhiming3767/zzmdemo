@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
+import com.example.zzmdemo.mapper.UserMapper;
 import com.example.zzmdemo.utils.EasyPoiUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,8 @@ import java.util.Map;
 public class ExcelController {
     @Resource
     private JdbcTestMapper jdbcTestMapper;
-
+    @Resource
+    private UserMapper userMapper;
 
     @RequestMapping("word")
     public void export(HttpServletRequest request, HttpServletResponse response) {
@@ -56,7 +58,7 @@ public class ExcelController {
 
     @GetMapping("excel")
     public void excel(HttpServletRequest request, HttpServletResponse response) {
-        List<SysUser> sysUserList = jdbcTestMapper.userTest();
+        List<SysUser> sysUserList = userMapper.userTest();
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, null), SysUser.class, sysUserList);
         try {
             response.setCharacterEncoding("UTF-8");

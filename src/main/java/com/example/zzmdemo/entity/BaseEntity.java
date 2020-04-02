@@ -2,8 +2,9 @@ package com.example.zzmdemo.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Id;
+//import javax.persistence.Id;
 import java.util.Date;
 
 @Data

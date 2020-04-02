@@ -1,12 +1,18 @@
 package com.example.zzmdemo.mapper;
 
-import com.example.zzmdemo.common.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.zzmdemo.entity.SysMenu;
 import com.example.zzmdemo.entity.SysUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-@org.apache.ibatis.annotations.Mapper
-public interface UserMapper extends Mapper<SysMenu> {
+import java.util.List;
+
+
+public interface UserMapper extends BaseMapper<SysMenu> {
 
     SysUser userLogin(@Param("loginName")String loginName,@Param("password")String password);
+
+    List<SysUser> userTest();
 }

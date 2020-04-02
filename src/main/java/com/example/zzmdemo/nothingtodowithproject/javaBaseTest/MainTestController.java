@@ -20,6 +20,7 @@ import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -38,6 +39,10 @@ public class MainTestController {
     private InterfaceDemo interfaceDemo;
 
     public static void main(String[] args){
+        SysUser sysUser=new SysUser();
+        Class<?> perClazz=sysUser.getClass();
+        Method[] methods = perClazz.getMethods();
+
         List<Integer> list1=new ArrayList<>();
         List<Integer> list2=new ArrayList<>();
         list1.add(1);

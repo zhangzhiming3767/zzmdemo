@@ -3,6 +3,7 @@ package com.example.zzmdemo.service;
 import com.example.zzmdemo.common.IdGenerator;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
+import com.example.zzmdemo.mapper.UserMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class JdbcTestService {
     private JdbcTestMapper jdbcTestMapper;
     @Resource
     private IdGenerator idGenerator;
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * @author zhangzhiming
@@ -29,7 +32,7 @@ public class JdbcTestService {
     @Transactional(rollbackFor = Exception.class)
     public Page<SysUser> userTest(Integer pageNumber, Integer pageSize) {
         PageHelper.startPage(pageNumber, pageSize);
-        return (Page<SysUser>) jdbcTestMapper.userTest();
+        return (Page<SysUser>) userMapper.userTest();
     }
 
     public String addUser(SysUser sysUser) {
@@ -50,7 +53,7 @@ public class JdbcTestService {
       */
      public String updateUser(SysUser sysUser) {
          sysUser.setCreateTime(new Date());
-         int count = jdbcTestMapper.updateByPrimaryKeySelective(sysUser);
+         int count = jdbcTestMapper.updateById(sysUser);
          if (count == 1) {
              return "保存成功！";
          } else {

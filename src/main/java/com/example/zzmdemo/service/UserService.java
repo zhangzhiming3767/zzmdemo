@@ -34,7 +34,7 @@ public class UserService {
     }
 
     public List<SysUser> getUserList(){
-        return jdbcTestMapper.userTest();
+        return userMapper.userTest();
     }
 
 

@@ -1,11 +1,10 @@
 package com.example.zzmdemo.mapper;
 
-import com.example.zzmdemo.common.Mapper;
 import com.example.zzmdemo.entity.SysUser;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.util.List;
 @org.apache.ibatis.annotations.Mapper
-public interface JdbcTestMapper extends Mapper<SysUser> {
+public interface JdbcTestMapper extends BaseMapper<SysUser> {
 
-    List<SysUser> userTest();
+//    List<SysUser> userTest();
 }
