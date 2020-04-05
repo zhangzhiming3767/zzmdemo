@@ -3,14 +3,23 @@ package com.example.zzmdemo.controller;
 import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import com.example.zzmdemo.dto.SysUserDto;
 import com.example.zzmdemo.entity.SysUser;
+import com.example.zzmdemo.entity.response.FailedResponse;
+import com.example.zzmdemo.entity.response.ObjectResponse;
+import com.example.zzmdemo.entity.response.Response;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
 import com.example.zzmdemo.mapper.UserMapper;
 import com.example.zzmdemo.utils.EasyPoiUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.net.ssl.HostnameVerifier;
@@ -25,6 +34,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +78,32 @@ public class ExcelController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    /**
+    * @author :zhangzhiming
+    * description :读取excel
+    * @date :Create in  2020/4/3 10:36
+    */
+    @PostMapping("importExcel")
+    public Response importExcel(HttpServletRequest request, MultipartFile file) throws IOException {
+        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+        List<SysUserDto> list = new ArrayList<>();
+        Sheet sheet = workbook.getSheetAt(0);
+        int count = sheet.getLastRowNum();
+        if(count<2){
+            return new FailedResponse("");
+        }
+        for (int j = 0; j <= count; j++) {
+            Row row = sheet.getRow(j);
+            SysUserDto dto = new SysUserDto();
+            dto.setId(String.valueOf(row.getCell(0).getNumericCellValue()));
+            dto.setUserName(row.getCell(1).getStringCellValue());
+            dto.setPhone(String.valueOf(row.getCell(2).getNumericCellValue()));
+            list.add(dto);
+        }
+        return new ObjectResponse<>(list);
     }
 
     /**
