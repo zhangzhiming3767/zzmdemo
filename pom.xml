@@ -35,6 +35,7 @@
 			<artifactId>freemarker</artifactId>
 			<version>2.3.29</version>
 		</dependency>
+		<!--代码生成-->
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-generator</artifactId>
@@ -158,6 +159,13 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.6.0</version>
+		</dependency>
+		<!--MQ
+		https://blog.csdn.net/zhangyuxuan2/article/details/82986702
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
 	</dependencies>
 
