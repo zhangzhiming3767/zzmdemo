@@ -27,7 +27,7 @@ public class RabbitmqController {
     private Sender sender;
 
     @PostMapping("sendTest")
-    public void importExcel()  {
-        sender.send();
+    public void importExcel(String message,Integer type)  {
+        sender.send(message,type);
     }
 }

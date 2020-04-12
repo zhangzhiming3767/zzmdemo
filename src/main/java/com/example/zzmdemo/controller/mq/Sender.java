@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 应用模块名称<p>
@@ -19,8 +20,9 @@ import java.util.Date;
 public class Sender {
     @Autowired
     RabbitTemplate rabbitTemplate;
-    public void send() {
-        String message =  "message" + new Date();
+    public void send(String message,Integer type) {
+//        String message =  "message" + new Date();
+        //routingkey
         System.out.println("Sender  " + message);
         rabbitTemplate.convertAndSend("immediate_exchange_test1", "immediate_routing_key_test1", message);
     }

@@ -18,7 +18,9 @@ public class Receiver {
     @RabbitHandler
     @RabbitListener(queues = "immediate_queue_test1")
     public void immediateProcess(String message) {
-        System.out.println("Receiver" + message);
+
+        System.out.println("Receiver1 " + message);
+
     }
 
 }
