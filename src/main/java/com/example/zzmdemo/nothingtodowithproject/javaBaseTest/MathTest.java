@@ -1,4 +1,4 @@
-package com.example.zzmdemo.nothingtodowithproject.math;
+package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
 /**
  * 应用模块名称<p>
