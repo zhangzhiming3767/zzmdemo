@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.zzmdemo.mapper.SysOrgMapper">
+
+    <select id="qryChildByParentId" resultType="com.example.zzmdemo.vo.SysOrgVo">
+      select * from sys_org where delete_flag=1
+        <if test="left != null and left!='' ">
+          and   left_node >=#{left}
+        </if>
+        <if test="right != null and right!='' ">
+            and   right_node &lt;= #{right}
+        </if>
+        <if test="level != null and level!='' ">
+            and   level=#{level}
+        </if>
+    </select>
+    <update id="updateAllLeft" >
+      update sys_org set left_node=left_node+#{count}
+      where left_node>=#{leftNum}
+      and delete_flag=1
+    </update>
+    <update id="updateAllRight" >
+      update sys_org set right_node=right_node+#{count}
+      where right_node>=#{rightNum}
+      and delete_flag=1
+    </update>
+    <select id="qryMaxRight" resultType="com.example.zzmdemo.entity.SysOrg">
+      select * from sys_org where right_node in (
+      select max(right_node) from sys_org where delete_flag=1
+      ) and delete_flag=1
+    </select>
+</mapper>

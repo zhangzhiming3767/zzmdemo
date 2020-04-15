@@ -8,8 +8,7 @@ import org.springframework.data.annotation.Id;
 //@Table(name = "sys_user")
 @EqualsAndHashCode(callSuper = false)
 public class SysUser extends BaseEntity {
-    @Id
-    private String id;
+
     //    @Excel(name = "登录名", width = 30)
     private String loginName;
     //    @Excel(name = "手机号码", width = 30)

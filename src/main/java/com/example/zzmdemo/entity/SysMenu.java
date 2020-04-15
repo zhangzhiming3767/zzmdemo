@@ -35,10 +35,6 @@ public class SysMenu extends BaseEntity implements Serializable {
      */
     private Integer order;
     /**
-     * 是否有效 1是 0否
-     */
-    private String delState;
-    /**
      * 启用禁用状态 1启0禁
      */
     private String useState;
