@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ZzmdemoApplication {
 
 	public static void main(String[] args) {
+		//解决netty冲突
+		System.setProperty("es.set.netty.runtime.available.processors", "false");
 		SpringApplication.run(ZzmdemoApplication.class, args);
 	}
 
