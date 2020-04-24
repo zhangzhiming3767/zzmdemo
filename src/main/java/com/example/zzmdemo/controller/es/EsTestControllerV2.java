@@ -62,6 +62,7 @@ public class EsTestControllerV2 {
         @SuppressWarnings("resource")
         TransportClient client = new PreBuiltTransportClient(settings)
                 .addTransportAddress(new TransportAddress(InetAddress.getByName(networkHost), 9300));
+        client.prepareIndex();
         return client;
     }
 
@@ -75,7 +76,7 @@ public class EsTestControllerV2 {
                 "}";
         //IndexRequestBuilder prepareIndex(String index, String type)
         final IndexResponse response = getTransportClient().prepareIndex("twitter", "tweet")
-                .setSource(json, XContentType.JSON).get();
+                .setSource(json).get();
         //获取索引
         final String index = response.getIndex();
         //获取类型
@@ -98,7 +99,7 @@ public class EsTestControllerV2 {
         json.put("postDate", new Date());
         json.put("message", "trying out Elasticsearch by map");
         final IndexResponse response = getTransportClient().prepareIndex("twitter2", "tweet")
-                .setSource(json, XContentType.JSON).get();
+                .setSource(json).get();
         //获取索引
         final String index = response.getIndex();
         //获取类型
@@ -124,7 +125,7 @@ public class EsTestControllerV2 {
                 .field("message", "trying out Elasticsearch byJsonBuilder")
                 .endObject();
         IndexResponse response = getTransportClient().prepareIndex("twitter4", "tweet")
-                .setSource(builder, XContentType.JSON)
+                .setSource(builder)
                 .get();
         //获取索引
         final String index = response.getIndex();
@@ -151,12 +152,12 @@ public class EsTestControllerV2 {
                 .field("content", article.getContent())
                 .field("createTime", new Date())
                 .endObject();
+        //type cmsArticle
         IndexResponse response = getTransportClient().prepareIndex("databasesname", article.getType())
-                .setSource(builder, XContentType.JSON)
+                .setSource(builder)
                 .get();
         return new ObjectResponse<>(response);
     }
-
     @RequestMapping("qryByIndexAndType")
     public Response qry2(String index, String type) throws IOException {
         SearchResponse searchResponse = getTransportClient().prepareSearch(index)
