@@ -25,19 +25,71 @@ public class SingleLinkList {
             heroNode.setId(i + "");
             heroNode.setNo(i);
             heroNode.setNickName("第" + i + "个节点");
+            //尾插法
+            temp = addNodeHead(temp, heroNode);
+        }
+
+        System.out.println("");
+    }
+
+    /**
+     * 暂存
+     */
+    public void temporary(){
+        HeroNode temp = null;
+        for (int i = 0; i < 3; i++) {
+            HeroNode heroNode = new HeroNode();
+            heroNode.setId(i + "");
+            heroNode.setNo(i);
+            heroNode.setNickName("第" + i + "个节点");
+            //尾插法
             temp = addNodeTail(temp, heroNode);
         }
+        //链表循环
+        temp = cycle(temp);
+        //链表反转
         temp = reverse(temp);
         HeroNode heroNode = new HeroNode();
         heroNode.setId("2");
         heroNode.setNo(2);
         heroNode.setNickName("第" + 2 + "个节点，这是被覆盖的值");
+        //在指定节点插入
         temp = addByOrder(temp, heroNode, true);
         heroNode.setNickName("第" + 2 + "个节点，这是被更新的值");
+        //更新指定节点的值
         temp = updateByNo(temp, heroNode);
+        //删除指定节点
         temp = delete(temp, 2);
+        //查找指定节点
         temp = queryByNo(temp, 1);
-        System.out.println("");
+    }
+
+
+    /**
+     * 判断链表有没有循环
+     * @param temp 原数据
+     * @return true 有
+     */
+    public  static Boolean judgeCycle(HeroNode temp){
+
+        return true;
+    }
+
+    /**
+     * 头插法
+     * @param temp 原数据
+     * @param heroNode 新数据
+     * @return 结果
+     */
+    public static HeroNode addNodeHead(HeroNode temp, HeroNode heroNode) {
+        if(temp==null){
+            return heroNode;
+        }
+        if(heroNode==null){
+            throw new RuntimeException("待插入的节点不能为空");
+        }
+        heroNode.next=temp;
+        return heroNode;
     }
 
     /**
@@ -59,6 +111,22 @@ public class SingleLinkList {
         //当退出while循环时，已经找到链表的在最后，用这个节点的next指向新的节点
         result.next = heroNode;
         return temp;
+    }
+    /**
+     * 将链表收尾相连，循环
+     * @param result 原数据
+     * @return 新数据
+     */
+    public static HeroNode cycle(HeroNode result) {
+        if(result==null){
+            throw new RuntimeException("链表不能为空");
+        }
+        HeroNode temp=result;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=result;
+        return result;
     }
 
     /**
