@@ -1,5 +1,7 @@
 package com.example.zzmdemo.dto;
 
+import lombok.Data;
+
 /**
  * 应用模块名称<p>
  * 代码描述<p>
@@ -9,16 +11,26 @@ package com.example.zzmdemo.dto;
  * @author zhangzhiming
  * @since 2020/3/11 21:35
  */
-public class Node {
-    public Object e;
-    public Node next;
-    public Node pre;
-    public Node(){
 
-    }
-    public Node(Object e){
-        this.e = e;
-        next = null;
-        pre = null;
+public class Node {
+    //    public Object e;
+//    public Node next;
+//    public Node pre;
+//    public Node(){
+//
+//    }
+//    public Node(Object e){
+//        this.e = e;
+//        next = null;
+//        pre = null;
+//    }
+
+    //下一个结点
+    public Node next = null;
+    //结点数据
+    public int data;
+
+    public Node(int data) {
+        this.data = data;
     }
 }

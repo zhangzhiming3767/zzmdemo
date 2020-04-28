@@ -158,6 +158,23 @@ public class EsTestControllerV2 {
                 .get();
         return new ObjectResponse<>(response);
     }
+
+    @RequestMapping("addArticleV2")
+    public Response addArticleV2(@RequestBody Article article) throws IOException {
+        XContentBuilder builder = jsonBuilder()
+                .startObject()
+                .field("title", article.getType())
+                .field("content", article.getContent())
+                .field("createTime", new Date())
+                .endObject();
+        //type cmsArticle
+        IndexResponse response = getTransportClient().prepareIndex()
+                .setSource(builder)
+                .get();
+        return new ObjectResponse<>(response);
+    }
+
+
     @RequestMapping("qryByIndexAndType")
     public Response qry2(String index, String type) throws IOException {
         SearchResponse searchResponse = getTransportClient().prepareSearch(index)
