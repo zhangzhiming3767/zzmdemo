@@ -47,8 +47,13 @@ public class ValuePassing {
         changeListV2(sysUserList);
         System.out.println(sysUser.toString());
         System.out.println("sysUser "+sysUser.hashCode());
+        int a=1;
+        changeInt(a);
+        System.out.println(a);
     }
-
+    private static void changeInt(int a){
+       a=2;
+    }
     private static void changeString(String s){
        s="cd";
         System.out.println("changeString s "+s.hashCode());
