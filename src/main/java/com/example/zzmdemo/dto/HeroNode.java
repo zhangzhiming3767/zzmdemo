@@ -20,6 +20,6 @@ public class HeroNode {
     public HeroNode next;
     @Override
     public String toString() {
-        return "HeroNode [no=" + no + ", id=" + id + ", nickName=" + nickName + "]";
+        return "HeroNode [no=" + no + ", id=" + id + ", nickName=" + nickName + " next="+next+"]";
     }
 }

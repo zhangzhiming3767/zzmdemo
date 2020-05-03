@@ -25,17 +25,17 @@ public class SingleLinkList {
             heroNode.setId(i + "");
             heroNode.setNo(i);
             heroNode.setNickName("第" + i + "个节点");
-            //尾插法
-            temp = addNodeHead(temp, heroNode);
+            //头插法
+            temp = addNodeTail(temp, heroNode);
         }
-
+        temp = reverseV4(temp);
         System.out.println("");
     }
 
     /**
      * 暂存
      */
-    public void temporary(){
+    public void temporary() {
         HeroNode temp = null;
         for (int i = 0; i < 3; i++) {
             HeroNode heroNode = new HeroNode();
@@ -44,11 +44,18 @@ public class SingleLinkList {
             heroNode.setNickName("第" + i + "个节点");
             //尾插法
             temp = addNodeTail(temp, heroNode);
+            //头插法
+//            temp = addNodeHead(temp, heroNode);
         }
         //链表循环
         temp = cycle(temp);
-        //链表反转
+        //判断链表是否有环（默认链表上没有两个一样的节点）
+        boolean test = judgeCycle(temp);
+        //链表反转  放入list
         temp = reverse(temp);
+        //链表反转  头插法
+        temp = reverseV2(temp);
+
         HeroNode heroNode = new HeroNode();
         heroNode.setId("2");
         heroNode.setNo(2);
@@ -67,28 +74,41 @@ public class SingleLinkList {
 
     /**
      * 判断链表有没有循环
+     *
      * @param temp 原数据
      * @return true 有
      */
-    public  static Boolean judgeCycle(HeroNode temp){
-
-        return true;
+    public static Boolean judgeCycle(HeroNode temp) {
+        if (temp == null) {
+            return false;
+        }
+        HeroNode slow = temp;
+        HeroNode fast = temp;
+        while (slow.next != null && fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      * 头插法
-     * @param temp 原数据
+     *
+     * @param temp     原数据
      * @param heroNode 新数据
      * @return 结果
      */
     public static HeroNode addNodeHead(HeroNode temp, HeroNode heroNode) {
-        if(temp==null){
+        if (temp == null) {
             return heroNode;
         }
-        if(heroNode==null){
+        if (heroNode == null) {
             throw new RuntimeException("待插入的节点不能为空");
         }
-        heroNode.next=temp;
+        heroNode.next = temp;
         return heroNode;
     }
 
@@ -112,20 +132,22 @@ public class SingleLinkList {
         result.next = heroNode;
         return temp;
     }
+
     /**
      * 将链表收尾相连，循环
+     *
      * @param result 原数据
      * @return 新数据
      */
     public static HeroNode cycle(HeroNode result) {
-        if(result==null){
+        if (result == null) {
             throw new RuntimeException("链表不能为空");
         }
-        HeroNode temp=result;
-        while(temp.next!=null){
-            temp=temp.next;
+        HeroNode temp = result;
+        while (temp.next != null) {
+            temp = temp.next;
         }
-        temp.next=result;
+        temp.next = result;
         return result;
     }
 
@@ -154,7 +176,7 @@ public class SingleLinkList {
                 newResult.next = list.get(i);
                 if (i == 0) {
                     newResult.next.next = null;
-                }else {
+                } else {
                     newResult = newResult.next;
                 }
             }
@@ -162,6 +184,62 @@ public class SingleLinkList {
         return temp;
     }
 
+    /**
+     * 头插法 反转链表
+     *
+     * @param result
+     * @return
+     */
+    public static HeroNode reverseV2(HeroNode result) {
+        HeroNode temp = new HeroNode();
+        HeroNode temp2 = result;
+        while (temp2 != null) {
+            HeroNode pNex = temp2.next;
+            temp2.next = temp.next;
+            temp.next = temp2;
+            temp2 = pNex;
+        }
+        return temp.next;
+    }
+
+    /**
+     * 就地反转法 反转链表
+     *
+     * @param head
+     * @return
+     */
+    public static HeroNode reverseV3(HeroNode head) {
+        if (head == null) {
+            return null;
+        }
+        HeroNode dummy = new HeroNode();
+        dummy.next = head;
+        HeroNode prev = dummy.next;
+        HeroNode pCur = prev.next;
+        while (pCur != null) {
+            prev.next = pCur.next;
+            pCur.next = dummy.next;
+            dummy.next = pCur;
+            pCur = prev.next;
+        }
+        return dummy.next;
+    }
+
+    /**
+     * 反转链表 递归法
+     *
+     * @param head
+     * @return
+     */
+    public static HeroNode reverseV4(HeroNode head) {
+        if (null == head || null == head.next) {
+            return head;
+        }
+        HeroNode newHead = reverseV4(head.next);
+        head.next.next = head;
+        head.next = null;
+        return newHead;
+    }
     /**
      * 插入英雄的方式，将节点插入指定位置
      *
