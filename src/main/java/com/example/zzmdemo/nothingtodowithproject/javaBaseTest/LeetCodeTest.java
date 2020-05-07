@@ -20,7 +20,7 @@ public class LeetCodeTest {
         //题目1的测试
 //        addTwoNumbersTest();
         //题目2的测试
-        int size = getMaxSonStringV2("");
+        int size = getMaxSonStringV2("pwwkew");
         System.out.println(size);
     }
 
@@ -128,7 +128,7 @@ public class LeetCodeTest {
     }
 
     /**
-     * 题目2 有效答案2
+     * 题目2 有效答案2  这个版本多次改进
      * 执行用时 :112 ms, 在所有 Java 提交中击败了13.08%的用户
      * 内存消耗 :40.6 MB, 在所有 Java 提交中击败了5.20%的用户
      * @param s  入参
@@ -147,13 +147,19 @@ public class LeetCodeTest {
         // 改完后时间内存都下降了
         Set<Character> addSet = new HashSet<>();
         //双层循环试试
+        int k = 0;
         for (int i = 0; i < size; i++) {
-            addSet.clear();
+            if(i>0){
+                addSet.remove(s.charAt(i-1));
+                k--;
+            }
             if(size-i<=result){
                 return result;
             }
             //优化点  当第二层到j出现重复时，i右移一位，j没必要从i开始，可以从上一次结束位置继续
-            for (int j = i; j < size; j++) {
+            //这个优化完之后，时间降到了14ms
+            for (int j=k; j < size; j++) {
+                k++;
                 if (!addSet.add(s.charAt(j))) {
                     if (result < addSet.size()) {
                         result = addSet.size();
