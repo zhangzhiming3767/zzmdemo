@@ -20,51 +20,283 @@ public class LeetCodeTest {
         //题目1的测试
 //        addTwoNumbersTest();
         //题目2的测试
-        int size = getMaxSonStringV2("pwwkew");
-        System.out.println(size);
+//        int size = getMaxSonStringV2("pwwkew");
+        long beg = System.currentTimeMillis();
+//        String result = getPalindromeV4("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
+//                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        String result = getPalindromeV4("qaabaabd");
+        System.out.println((System.currentTimeMillis() - beg));
+        //3s
+        System.out.println(result);
     }
 
     /**
+     * 题目3  有效答案1
      * 回文字符串
+     * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+     * <p>
+     * 示例 1：
+     * <p>
+     * 输入: "babad"
+     * 输出: "bab"
+     * 注意: "aba" 也是一个有效答案。
+     * 示例 2：
+     * <p>
+     * 输入: "cbbd"
+     * 输出: "bb"
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/longest-palindromic-substring
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param s 入参
+     *          执行用时 :412 ms, 在所有 Java 提交中击败了10.37%的用户
+     *          内存消耗 :40.5 MB, 在所有 Java 提交中击败了15.18%的用户
+     *          思路，从第一个取，从第二个开始判断是不是回文字符串，直至取到最后一个
+     *          再从第二个开始取，
+     *          时间复杂度为 O(n3）
+     *          这就是暴力破解法，当然，在细节做了很多优化，实际时间是低于O(n3），当然，优化再多，改变不了3层循环的局面
+     *          最初几版因执行时间太长都测试没通过，不得不进行反复优化
      */
-    private static String get(String s) {
+    private static String getPalindrome(String s) {
         if (s == null || "".equals(s)) {
-            return null;
+            return "";
         }
-        String[] tmp = new String[s.length()];
-        for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = String.valueOf(s.charAt(i));
+        int size = s.length();
+        if (size == 1) {
+            return s;
         }
         int maxSize = 0;
-        String result = null;
-        //思路，从第一个取，从第二个开始判断是不是回文字符串，直至取到最后一个
-        //再从第二个开始取，
-
-        for (int i = 0; i < tmp.length; i++) {
-            List<String> list = new ArrayList<>();
-            for (int j = i; j < tmp.length; j++) {
-                list.add(tmp[j]);
-                if (judge(list) && list.size() > maxSize) {
-                    maxSize = list.size();
-                    result = list.toString();
+        List<Character> resultList = new ArrayList<>();
+        List<Character> list = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            list.clear();
+            for (int j = i; j < size; j++) {
+                list.add(s.charAt(j));
+                int listSize = j - i + 1;
+                //这里换了下前后顺序 提升了性能
+                if (listSize > maxSize) {
+                    boolean judge = true;
+                    if (listSize > 1) {
+                        int sizeTwo = (listSize % 2 == 0 ? listSize / 2 : (listSize - 1) / 2);
+                        for (int k = 0; k < sizeTwo; k++) {
+                            if (!Objects.equals(list.get(k), list.get(listSize - k - 1))) {
+                                judge = false;
+                                //这个时间省了一半
+                                break;
+                            }
+                        }
+                    }
+                    if (judge) {
+                        maxSize = listSize;
+                        resultList = new ArrayList<>(list);
+                    }
                 }
             }
-        }
-        return result;
-    }
-
-    private static boolean judge(List<String> list) {
-        if (list == null || list.size() < 2) {
-            return false;
-        }
-        int listSize = list.size();
-        int size = (listSize % 2 == 0 ? listSize / 2 : (listSize - 1) / 2);
-        for (int i = 0; i < size; i++) {
-            if (!Objects.equals(list.get(i), list.get(listSize - i - 1))) {
-                return false;
+            //这也是一个优化点
+            if (size - i - 1 < maxSize) {
+                break;
             }
         }
-        return true;
+        StringBuilder result = new StringBuilder();
+        for (Character r : resultList) {
+            result.append(r);
+        }
+        return result.toString();
+    }
+
+
+    /**
+     * 题目3 参考答案2   时间复杂度O(n)
+     * Manacher's Algorithm 马拉车算法
+     * 时间复杂度：for 循环里边套了一层 while 循环，难道不是 O(n²)O(n²)？不！其实是 O(n)O(n)。
+     * 不严谨的想一下，因为 while 循环访问 R 右边的数字用来扩展，也就是那些还未求出的节点，然后不断扩展，
+     * 而期间访问的节点下次就不会再进入 while 了，可以利用对称得到自己的解，
+     * 所以每个节点访问都是常数次，所以是 O ( n )O(n)。
+     * <p>
+     * Manacher 算法是基于“中心扩散法”，采用和 kmp 算法类似的思想，依然是“以空间换时间”
+     * 1、分隔符是一个字符，种类也只有一个，并且这个字符一定不能是原始字符串中出现过的字符；
+     * 2、加入了分隔符以后，使得“间隙”有了具体的位置，方便后续的讨论，并且新字符串中的任意一个回文子串在原始字符串中的一定能找到
+     * 唯一的一个回文子串与之对应，因此对新字符串的回文子串的研究就能得到原始字符串的回文子串；
+     * 3、新字符串的回文子串的长度一定是奇数；
+     * 4、新字符串的回文子串一定以分隔符作为两边的边界，因此分隔符起到“哨兵”的作用。
+     * <p>
+     * 时间9 ms
+     * 内存 39.4 M
+     *
+     * @param s 参数
+     * @return 返回值
+     */
+    public static String getPalindromeV2(String s) {
+        String t = preProcess(s);
+        int n = t.length();
+        int[] p = new int[n];
+        // c 表示左边   r表示右边
+        int c = 0, r = 0;
+        for (int i = 1; i < n - 1; i++) {
+            int iMirror = 2 * c - i;
+            if (r > i) {
+                // 防止超出 R   这行是算法的核心
+                p[i] = Math.min(r - i, p[iMirror]);
+            } else {
+                // 等于 R 的情况
+                p[i] = 0;
+            }
+            // 碰到之前讲的三种情况时候，需要利用中心扩展法
+            while (t.charAt(i + 1 + p[i]) == t.charAt(i - 1 - p[i])) {
+                p[i]++;
+            }
+            // 判断是否需要更新 R
+            if (i + p[i] > r) {
+                c = i;
+                r = i + p[i];
+            }
+        }
+        // 找出 P 的最大值
+        int maxLen = 0;
+        int centerIndex = 0;
+        for (int i = 1; i < n - 1; i++) {
+            if (p[i] > maxLen) {
+                maxLen = p[i];
+                centerIndex = i;
+            }
+        }
+        //最开始讲的求原字符串下标
+        int start = (centerIndex - maxLen) / 2;
+        return s.substring(start, start + maxLen);
+    }
+
+    public static String getPalindromeV4(String s) {
+        // 特判
+        int len = s.length();
+        if (len < 2) {
+            return s;
+        }
+        // 得到预处理字符串
+        String str = preProcessV2(s);
+        // 新字符串的长度
+        int sLen = 2 * len + 1;
+        // 数组 p 记录了扫描过的回文子串的信息
+        int[] p = new int[sLen];
+        // 双指针，它们是一一对应的，须同时更新
+        int maxRight = 0;
+        int center = 0;
+        // 当前遍历的中心最大扩散步数，其值等于原始字符串的最长回文子串的长度
+        int maxLen = 1;
+        // 原始字符串的最长回文子串的起始位置，与 maxLen 必须同时更新
+        int start = 0;
+        for (int i = 0; i < sLen; i++) {
+            if (i < maxRight) {
+                int mirror = 2 * center - i;
+                // 这一行代码是 Manacher 算法的关键所在，要结合图形来理解
+                p[i] = Math.min(maxRight - i, p[mirror]);
+            }
+            // 下一次尝试扩散的左右起点，能扩散的步数直接加到 p[i] 中
+            int left = i - (1 + p[i]);
+            int right = i + (1 + p[i]);
+            // left >= 0 && right < sLen 保证不越界
+            // str.charAt(left) == str.charAt(right) 表示可以扩散 1 次
+            while (left >= 0 && right < sLen && str.charAt(left) == str.charAt(right)) {
+                p[i]++;
+                left--;
+                right++;
+            }
+            // 根据 maxRight 的定义，它是遍历过的 i 的 i + p[i] 的最大者
+            // 如果 maxRight 的值越大，进入上面 i < maxRight 的判断的可能性就越大，这样就可以重复利用之前判断过的回文信息了
+            if (i + p[i] > maxRight) {
+                // maxRight 和 center 需要同时更新
+                maxRight = i + p[i];
+                center = i;
+            }
+            if (p[i] > maxLen) {
+                // 记录最长回文子串的长度和相应它在原始字符串中的起点
+                maxLen = p[i];
+                start = (i - maxLen) / 2;
+            }
+        }
+        return s.substring(start, start + maxLen);
+    }
+
+    /**
+     * 原本给的答案是String拼接，改成StringBuilder后性能提升了好多
+     * 首先我们解决下奇数和偶数的问题，在每个字符间插入 "#"，并且为了使得扩展的过程中，到边界后自动结束，在两端分别插入 "^" 和 "$"，
+     * 两个不可能在字符串中出现的字符，这样中心扩展的时候，判断两端字符是否相等的时候，如果到了边界就一定会不相等，
+     * 从而出了循环。经过处理，字符串的长度永远都是奇数了。
+     *
+     * @param s 入参
+     * @return 返回值
+     */
+    public static String preProcess(String s) {
+        int n = s.length();
+        if (n == 0) {
+            return "^$";
+        }
+        StringBuilder ret = new StringBuilder();
+        ret.append("^");
+        for (int i = 0; i < n; i++) {
+            ret.append("#").append(s.charAt(i));
+        }
+        ret.append("#$");
+        return ret.toString();
+    }
+
+    public static String preProcessV2(String s) {
+        int n = s.length();
+        if (n == 0) {
+            return "";
+        }
+        StringBuilder ret = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            ret.append("#").append(s.charAt(i));
+        }
+        ret.append("#");
+        return ret.toString();
+    }
+
+    /**
+     * 题目3 参考答案3 扩展中心
+     * 执行用时 38 ms, 在所有 Java 提交中击败了67.12%的用户
+     * 内存消耗 :38.3 MB, 在所有 Java 提交中击败了24.10%的用户
+     * 我们知道回文串一定是对称的，所以我们可以每次循环选择一个中心，进行左右扩展，判断左右字符是否相等即可。
+     * 由于存在奇数的字符串和偶数的字符串，所以我们需要从一个字符开始扩展，或者从两个字符之间开始扩展，所以总共有 n+n-1 个中心。
+     * 这个理解起来倒是不难
+     *
+     * @param s 入参
+     * @return 返回
+     */
+    public static String getPalindromeV3(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            //这是奇数情况
+            int len1 = expandAroundCenter(s, i, i);
+            //这是偶数情况
+            int len2 = expandAroundCenter(s, i, i + 1);
+            int len = (len1 > len2 ? len1 : len2);
+            if (len > end - start) {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+    private static int expandAroundCenter(String s, int left, int right) {
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
     }
 
     /**
@@ -93,6 +325,7 @@ public class LeetCodeTest {
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      * 执行用时 :105 ms, 在所有 Java 提交中击败了13.87%的用户
      * 内存消耗 :42 MB, 在所有 Java 提交中击败了  <   5.20%的用户
+     *
      * @param s
      * @return
      */
@@ -110,7 +343,7 @@ public class LeetCodeTest {
         //双层循环试试
         for (int i = 0; i < tmp.length; i++) {
             addSet.clear();
-            if(tmp.length-i<=result){
+            if (tmp.length - i <= result) {
                 return result;
             }
             for (int j = i; j < tmp.length; j++) {
@@ -119,8 +352,8 @@ public class LeetCodeTest {
                         result = addSet.size();
                     }
                     break;
-                }else if(j==tmp.length-1 && result < addSet.size()){
-                        result = addSet.size();
+                } else if (j == tmp.length - 1 && result < addSet.size()) {
+                    result = addSet.size();
                 }
             }
         }
@@ -131,7 +364,8 @@ public class LeetCodeTest {
      * 题目2 有效答案2  这个版本多次改进
      * 执行用时 :112 ms, 在所有 Java 提交中击败了13.08%的用户
      * 内存消耗 :40.6 MB, 在所有 Java 提交中击败了5.20%的用户
-     * @param s  入参
+     *
+     * @param s 入参
      * @return 返回长度
      * 对上面的方法进行里处理，内存消耗少了，但时间长了
      */
@@ -141,7 +375,7 @@ public class LeetCodeTest {
         if (s == null) {
             return 0;
         }
-        int size=s.length();
+        int size = s.length();
         int result = 0;
         //这里用Character   而不用string，是从官方答案里学到的，确实没必要多一步转string的操作,
         // 改完后时间内存都下降了
@@ -149,23 +383,23 @@ public class LeetCodeTest {
         //双层循环试试
         int k = 0;
         for (int i = 0; i < size; i++) {
-            if(i>0){
-                addSet.remove(s.charAt(i-1));
+            if (i > 0) {
+                addSet.remove(s.charAt(i - 1));
                 k--;
             }
-            if(size-i<=result){
+            if (size - i <= result) {
                 return result;
             }
             //优化点  当第二层到j出现重复时，i右移一位，j没必要从i开始，可以从上一次结束位置继续
             //这个优化完之后，时间降到了14ms
-            for (int j=k; j < size; j++) {
+            for (int j = k; j < size; j++) {
                 k++;
                 if (!addSet.add(s.charAt(j))) {
                     if (result < addSet.size()) {
                         result = addSet.size();
                     }
                     break;
-                }else if(j==size-1 && result < addSet.size()){
+                } else if (j == size - 1 && result < addSet.size()) {
                     result = addSet.size();
                 }
             }
@@ -174,20 +408,20 @@ public class LeetCodeTest {
     }
 
     /**
-     *题目2  官方给的答案
+     * 题目2  官方给的答案
+     *
      * @param s 入参
-     * @return
-     * 执行用时 :8 ms, 在所有 Java 提交中击败了71.92%的用户
+     * @return 执行用时 :8 ms, 在所有 Java 提交中击败了71.92%的用户
      * 内存消耗 :39.5 MB, 在所有 Java 提交中击败了6.23%的用户
      * 看起来内存 消耗并没有小多少，但时间比我写的小多了，
-     *
+     * <p>
      * 时间复杂度：O(N)O(N)，其中 NN 是字符串的长度。左指针和右指针分别会遍历整个字符串一次。
      * 空间复杂度：O(|\Sigma|)O(∣Σ∣)，其中 \SigmaΣ 表示字符集（即字符串中可以出现的字符），
      * |\Sigma|∣Σ∣ 表示字符集的大小。在本题中没有明确说明字符集，因此可以默认为所有 ASCII 码在 [0, 128)[0,128)
      * 内的字符，即 |\Sigma| = 128∣Σ∣=128。我们需要用到哈希集合来存储出现过的字符，而字符最多有 |\Sigma|∣Σ∣ 个，
      * 因此空间复杂度为 O(|\Sigma|)O(∣Σ∣)。
      */
-    public static int getMaxSonStringV3(String s){
+    public static int getMaxSonStringV3(String s) {
         // 哈希集合，记录每个字符是否出现过
         Set<Character> occ = new HashSet<Character>();
         int n = s.length();
