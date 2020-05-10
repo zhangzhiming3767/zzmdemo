@@ -17,6 +17,20 @@ import java.util.*;
 public class LeetCodeTest {
 
     public static void main(String[] args) {
+        long beg = System.currentTimeMillis();
+        //题目7的测试  整数反转
+        int result = reverseV2(1534236469);
+        System.out.println((System.currentTimeMillis() - beg));
+        //3s
+        System.out.println(result);
+    }
+
+    /**
+     * 一些题目的调用
+     */
+    public void test() {
+        //题目7的测试  整数反转
+        int result2 = reverseV2(1534236469);
         //题目1的测试
 //        addTwoNumbersTest();
         //题目2的测试
@@ -32,10 +46,118 @@ public class LeetCodeTest {
 //                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
 //                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" +
 //                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        //题目3的测试
         String result = getPalindromeV4("qaabaabd");
         System.out.println((System.currentTimeMillis() - beg));
         //3s
         System.out.println(result);
+    }
+
+    /**
+     * 题目7 整数反转  答案1 第一版
+     * 给出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+     * <p>
+     * 示例 1:
+     * 输入: 123
+     * 输出: 321
+     *  示例 2:
+     * 输入: -123
+     * 输出: -321
+     * 示例 3:
+     * 输入: 120
+     * 输出: 21
+     * 注意:
+     * <p>
+     * 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。
+     * <p>
+     * 来源：力扣（LeetCode）
+     * 链接：https://leetcode-cn.com/problems/reverse-integer
+     * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * @param x 入参
+     * @return 返回值
+     * 执行用时 :10 ms, 在所有 Java 提交中击败了6.95%的用户
+     * 内存消耗 :37.9 MB, 在所有 Java 提交中击败了5.33%的用户
+     */
+    public static int reverse(int x) {
+        Boolean state = (x > 0);
+        String temp = (state ? x : -x) + "";
+        int size = temp.length();
+        if (size == 1) {
+            return x;
+        }
+        char[] arr = temp.toCharArray();
+        int maxSize = (size % 2 > 0 ? size / 2 + 1 : size / 2);
+        for (int i = 0; i < maxSize; i++) {
+            char tem = arr[i];
+            arr[i] = arr[size - i - 1];
+            arr[size - i - 1] = tem;
+        }
+        StringBuilder result = new StringBuilder();
+        if (!state) {
+            result.append("-");
+        }
+        for (int i = 0; i < arr.length; i++) {
+            result.append(arr[i]);
+        }
+        try {
+            return Integer.valueOf(result.toString());
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * 对上面进行优化
+     *
+     * @param x 入参
+     * @return 返回
+     * 执行用时 :9 ms, 在所有 Java 提交中击败了7.63%的用户
+     * 内存消耗 :37.8 MB, 在所有 Java 提交中击败了5.33%的用户
+     */
+    public static int reverseV2(int x) {
+        Boolean state = (x > 0);
+        String temp = (state ? x : -x) + "";
+        int size = temp.length();
+        if (size == 1) {
+            return x;
+        }
+        char[] arr = temp.toCharArray();
+        StringBuilder result = new StringBuilder();
+        if (!state) {
+            result.append("-");
+        }
+        for (int i = size - 1; i >= 0; i--) {
+            result.append(arr[i]);
+        }
+        try {
+            return Integer.valueOf(result.toString());
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * 题目7 答案3  这种解法的思路就是不断除以10，取出最右边的，不断乘以10，做累加，最后就是结果
+     *时间复杂度：O(\log(x))O(log(x))，xx 中大约有 \log_{10}(x)log
+     * 10
+     * ​
+     *  (x) 位数字
+     * @param x 入参
+     * @return 返回
+     */
+    public static int reverse3(int x) {
+        int res = 0;
+        while (x != 0) {
+            int temp = x % 10 + res * 10;
+            //最关键的一步
+            if ((temp - x % 10) / 10 != res) {
+                return 0;
+            }
+            res = temp;
+            x /= 10;
+        }
+        return res;
     }
 
     /**
