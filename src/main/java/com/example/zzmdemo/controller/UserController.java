@@ -7,6 +7,8 @@ import com.example.zzmdemo.entity.response.Response;
 import com.example.zzmdemo.entity.response.SuccessResponse;
 import com.example.zzmdemo.service.JdbcTestService;
 import com.example.zzmdemo.service.UserService;
+import com.example.zzmdemo.utils.token.PassToken;
+import com.example.zzmdemo.utils.token.UserLoginToken;
 import com.github.pagehelper.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +42,7 @@ public class UserController {
      * @date 16:08 2019/11/14
      */
     @RequestMapping("/login")
+    @PassToken
     public Response userLogin(String loginName, String password) {
         return new ObjectResponse<>(userService.userLogin(loginName, password));
     }
@@ -51,6 +54,7 @@ public class UserController {
         return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
     }
     @RequestMapping(value ="/getUserList",method = RequestMethod.POST)
+    @UserLoginToken
     @ApiOperation(value = "获取用户列表", notes = "根据id来获取用户详细信息")
     public List<SysUser> getUserList( HttpServletResponse response, HttpServletRequest request) {
         return userService.getUserList();

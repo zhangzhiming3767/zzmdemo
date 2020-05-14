@@ -4,6 +4,7 @@ import com.example.zzmdemo.common.IdGenerator;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
 import com.example.zzmdemo.mapper.UserMapper;
+import com.example.zzmdemo.vo.SysUserVo;
 import com.github.pagehelper.Page;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ public class UserService {
     @Resource
     private IdGenerator idGenerator;
     @Resource
+    private TokenService tokenService;
+    @Resource
     private JdbcTestMapper jdbcTestMapper;
 
      /**
@@ -29,8 +32,10 @@ public class UserService {
       * description 登录
       * @date 16:10 2019/11/14
       */
-    public SysUser userLogin(String loginName, String password) {
-        return userMapper.userLogin(loginName,password);
+    public SysUserVo userLogin(String loginName, String password) {
+        SysUserVo sysUser=userMapper.userLogin(loginName,password);
+        sysUser.setToken(tokenService.getToken(sysUser.getId(),sysUser.getPassword()));
+        return sysUser;
     }
 
     public List<SysUser> getUserList(){
