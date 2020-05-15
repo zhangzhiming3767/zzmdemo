@@ -26,7 +26,7 @@ public class MenuController {
      * description 获取菜单列表
      * @date 11:20 2019/11/5
      */
-    @UserLoginToken
+//    @UserLoginToken
     @RequestMapping("/getMenuList")
     public Response userTest() {
         return new ObjectResponse<>(menuService.getMenuList());

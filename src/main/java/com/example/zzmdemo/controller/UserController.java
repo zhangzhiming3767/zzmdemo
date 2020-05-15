@@ -53,8 +53,8 @@ public class UserController {
         Page<SysUser> sysUserPage = jdbcTestService.userTest(pageNumber, pageSize);
         return new PageResponse<SysUser>(sysUserPage.getResult(), sysUserPage.getPageNum(), sysUserPage.getTotal());
     }
+    @PassToken
     @RequestMapping(value ="/getUserList",method = RequestMethod.POST)
-    @UserLoginToken
     @ApiOperation(value = "获取用户列表", notes = "根据id来获取用户详细信息")
     public List<SysUser> getUserList( HttpServletResponse response, HttpServletRequest request) {
         return userService.getUserList();
