@@ -1,6 +1,9 @@
 package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
 import com.example.zzmdemo.entity.SysUser;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -26,6 +29,9 @@ public class ObjectTest {
         sysUserList.add(sysUser);
         sysUser.setId("345");
         sysUserList.add(sysUser);
-        System.out.println("");
+        StringUtils.isEmpty("");
+        Integer sum=21;
+
+        System.out.println(sum/2);
     }
 }

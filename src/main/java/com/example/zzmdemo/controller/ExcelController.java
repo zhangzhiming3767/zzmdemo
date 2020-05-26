@@ -3,14 +3,17 @@ package com.example.zzmdemo.controller;
 import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import com.alibaba.fastjson.JSON;
 import com.example.zzmdemo.dto.SysUserDto;
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.entity.response.FailedResponse;
 import com.example.zzmdemo.entity.response.ObjectResponse;
 import com.example.zzmdemo.entity.response.Response;
+import com.example.zzmdemo.entity.response.SuccessResponse;
 import com.example.zzmdemo.mapper.JdbcTestMapper;
 import com.example.zzmdemo.mapper.UserMapper;
 import com.example.zzmdemo.utils.EasyPoiUtils;
+import com.example.zzmdemo.utils.token.PassToken;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -27,10 +30,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -64,6 +64,49 @@ public class ExcelController {
 //        params.put("test", null);
         //
         EasyPoiUtils.exportWord("word/aaa.docx", "E:/1/00Ztesoft/余杭", "aaa.docx", params, request, response);
+    }
+
+    /**
+    * @author :zhangzhiming
+    * description :导出json
+    * @date :Create in  2020/5/26 20:06
+    */
+    @PassToken
+    @GetMapping(value={"/exportJson"})
+    public void exportJson(HttpServletResponse response) throws IOException {
+        String userPath = "temporary"+ File.separator+"user.json";
+        SysUser sysUser = new SysUser();
+        sysUser.setLoginName("登录名");
+        sysUser.setId("这是id");
+        List<SysUser> sysUserList=new ArrayList<>();
+        sysUserList.add(sysUser);
+        File aFile = new File(userPath);
+        if (!aFile.exists() ) {
+            File temporary = new File("temporary");
+            if(!temporary.mkdirs() &&
+                    !aFile.createNewFile()){
+                throw new RuntimeException("文件夹生成失败");
+            }
+        }
+        FileOutputStream fileOutputStream = new FileOutputStream(aFile);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(JSON.toJSONString(sysUserList));
+        objectOutputStream.flush();
+        objectOutputStream.close();
+        //上传到服务器
+        InputStream inputStream = new FileInputStream(userPath);
+        // 设置强制下载不打开
+        response.setContentType("application/force-download");
+        // 设置文件名
+        response.addHeader("Content-Disposition", "attachment;fileName=user.json");
+        OutputStream out = response.getOutputStream();
+        int temp = 0;
+        while ((temp = inputStream.read()) != -1) {
+            out.write(temp);
+        }
+        inputStream.close();
+        out.close();
+        EasyPoiUtils.delAllFile( new File(userPath));
     }
 
     @GetMapping("excel")
