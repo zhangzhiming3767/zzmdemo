@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AspectInterceptor {
 
-    @Around("execution(* com.example.zzmdemo.controller.UserController.*(..))")
+    @Around("execution(* com.example.zzmdemo.controller.user.UserController.*(..))")
     public Object handlerControllerMethod(ProceedingJoinPoint point) throws Throwable {
         System.out.println("aspect 拦截开始");
         long start = System.currentTimeMillis();

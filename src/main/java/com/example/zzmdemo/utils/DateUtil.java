@@ -741,7 +741,7 @@ public class DateUtil {
         if (StringUtils.isEmpty(birthday)) {
             return 0;
         }
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         try {
             return getAgeByBirth(format.parse(birthday));
         } catch (ParseException e) {

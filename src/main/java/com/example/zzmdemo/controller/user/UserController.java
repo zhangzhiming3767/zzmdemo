@@ -1,4 +1,4 @@
-package com.example.zzmdemo.controller;
+package com.example.zzmdemo.controller.user;
 
 import com.example.zzmdemo.entity.SysUser;
 import com.example.zzmdemo.entity.response.ObjectResponse;

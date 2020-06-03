@@ -50,9 +50,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             }
         }
         //检查有没有需要用户权限的注解 默认所有接口都需要检查是否登录，不要检查的接口才加注解
-//        if (method.isAnnotationPresent(UserLoginToken.class)) {
+        if (method.isAnnotationPresent(UserLoginToken.class)) {
             UserLoginToken userLoginToken = method.getAnnotation(UserLoginToken.class);
-//            if (userLoginToken.required()) {
+            if (userLoginToken.required()) {
                 // 执行认证
                 if (token == null) {
                     throw new RuntimeException("无token，请重新登录");
@@ -76,9 +76,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     throw new RuntimeException("401");
                 }
                 return true;
-//            }
-//        }
-//        return true;
+            }
+        }
+        return true;
     }
 
     @Override
