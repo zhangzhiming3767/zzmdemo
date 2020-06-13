@@ -1,6 +1,8 @@
 package com.example.zzmdemo.nothingtodowithproject.javaBaseTest;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * 应用模块名称<p>
@@ -25,7 +27,24 @@ public class MapTest {
         // 0000 0111
         a |= b;
         System.out.println(a);
-
+        //遍历map的几种方式
+        Map<String,String> mapTest=new HashMap<>();
+        mapTest.put("这是第一个key","这是第一个value");
+        mapTest.put("这是第2个key","2");
+        for(String key:mapTest.keySet()){
+            System.out.println(key+" "+mapTest.get(key));
+        }
+        Iterator<Map.Entry<String,String>> iterator=mapTest.entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry<String,String> map=iterator.next();
+            System.out.println(map.getKey()+" "+map.getValue());
+        }
+        for(Map.Entry<String,String> entry:mapTest.entrySet()){
+            System.out.println(entry.getKey()+" "+entry.getValue());
+        }
+        for(String value:mapTest.values()){
+            System.out.println(value);
+        }
     }
 
     static final int tableSizeFor(int cap) {
