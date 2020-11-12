@@ -110,8 +110,14 @@ public class ExcelController {
     }
 
     @GetMapping("excel")
-    public void excel(HttpServletRequest request, HttpServletResponse response) {
-        List<SysUser> sysUserList = userMapper.userTest();
+    public void excel(HttpServletRequest request, HttpServletResponse response,Integer count) {
+//        List<SysUser> sysUserList = userMapper.userTest();
+        List<SysUser> sysUserList=new ArrayList<>();
+        for(int i=0;i<count;i++){
+            SysUser sysUser=new SysUser();
+            sysUser.setLoginName("人员名称"+i);
+            sysUserList.add(sysUser);
+        }
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(null, null), SysUser.class, sysUserList);
         try {
             response.setCharacterEncoding("UTF-8");

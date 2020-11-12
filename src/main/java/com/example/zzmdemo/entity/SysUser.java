@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class SysUser extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = -4188029478742720180L;
-    //    @Excel(name = "登录名", width = 30)
+        @Excel(name = "登录名", width = 30)
     private String loginName;
     @Excel(name = "手机号码", width = 30)
     private String phone;
