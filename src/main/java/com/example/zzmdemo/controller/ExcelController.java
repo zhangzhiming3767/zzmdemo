@@ -3,6 +3,9 @@ package com.example.zzmdemo.controller;
 import cn.afterturn.easypoi.entity.ImageEntity;
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
 import com.alibaba.fastjson.JSON;
 import com.example.zzmdemo.dto.SysUserDto;
 import com.example.zzmdemo.entity.SysUser;
@@ -28,6 +31,7 @@ import javax.annotation.Resource;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -38,7 +42,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 /**
  * 应用模块名称<p>
  * 代码描述<p>
@@ -127,6 +130,33 @@ public class ExcelController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @GetMapping("hutoolExcelExport")
+    public void hutoolExcelExport(HttpServletRequest request, HttpServletResponse response,Integer count) {
+        List<SysUser> sysUserList=new ArrayList<>();
+        for(int i=0;i<count;i++){
+            SysUser sysUser=new SysUser();
+            sysUser.setLoginName("人员名称"+i);
+            sysUserList.add(sysUser);
+        }
+        ExcelWriter excelWriter= ExcelUtil.getBigWriter(-1);
+        //自定义标题别名
+        excelWriter.addHeaderAlias("loginName", "登录名");
+        excelWriter.write(sysUserList, true);
+        response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setHeader("Content-Disposition", "attachment;filename=" + "tets" + ".xlsx");
+        ServletOutputStream out = null;
+        try {
+            out = response.getOutputStream();
+            excelWriter.flush(out, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            excelWriter.close();
+        }
+        IoUtil.close(out);
+
     }
 
 
